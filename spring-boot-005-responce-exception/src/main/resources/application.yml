@@ -1,0 +1,6 @@
+server:
+  port: 8085
+
+spring:
+  jackson:
+    default-property-inclusion: non_null # non_empty：不返回""和null  non_null：不返回null

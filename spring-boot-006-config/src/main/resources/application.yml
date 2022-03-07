@@ -1,0 +1,30 @@
+server:
+  port: 8086
+
+spring:
+  jackson:
+    time-zone: Asia/Shanghai
+
+# https://www.cnblogs.com/charleswone/p/11437661.html
+user:
+  name: zhangsan
+  age: 50
+  birth: 1970/10/02 # 需要上面指明time-zone 否则会相差8个小时
+  hobby:
+    - smoke
+    - drink
+    - perm
+  pets:
+    - name: mimi
+      breed: cat
+    - name: laifu
+      breed: dog
+  maps:
+    {
+      key1: {
+        "ck1": "cv1",
+        "ck2": 2
+      },
+      key2: "va2"
+    }
+
