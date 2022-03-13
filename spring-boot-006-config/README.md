@@ -1,6 +1,10 @@
+![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220313132324455.png)
+
 SpringBoot配置文件的主要目的是为了方便程序员去修改默认的配置项，比如数据库的`地址`、`用户名`、`密码`等个性化的配置；除此之外，有时候也需要自定义一些个性化的配置项来满足业务的需要；如何配置？如何获取？
 
 `@Value`注解除了获取单个配置，SpEL表达式如何进行复杂的处理？，下面就一起来玩一下；
+
+> 示例源码：https://github.com/vehang/ehang-spring-boot/tree/main/spring-boot-006-config
 
 ## 目录
 
@@ -596,4 +600,6 @@ private Map map;   // {"k1":"v1","k2":"v2"}
   private String javaHome;  // java的安装路径 D:\xxx\jre
   ```
 
+
+最近正在整理SpringBoot的教程：https://github.com/vehang/ehang-spring-boot  欢迎Star
 
