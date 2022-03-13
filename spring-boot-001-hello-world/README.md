@@ -1,5 +1,9 @@
 ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220313162054091.png)
 
+大家好，我是一航！
+
+今天带大家来创建我们的第一个SpringBoot项目，开启一段全新，完全不一样的旅程....
+
 ## 什么是SpringBoot
 
 Spring Boot是由Pivotal团队提供的全新框架，其设计目的是用来简化新Spring应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。
