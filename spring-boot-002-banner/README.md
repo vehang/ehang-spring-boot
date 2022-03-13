@@ -1,6 +1,6 @@
 
 
-![](https://pic.netbian.com/uploads/allimg/210502/235717-16199710375e01.jpg)
+![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/235717-16199710375e01.jpg)
 
 大家好，我是一航！
 
