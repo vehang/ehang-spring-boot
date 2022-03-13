@@ -1,4 +1,4 @@
-package com.ehang.config.beans;
+package com.ehang.config.cp;
 
 import lombok.Data;
 

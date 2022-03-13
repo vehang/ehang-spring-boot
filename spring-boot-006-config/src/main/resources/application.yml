@@ -5,11 +5,16 @@ spring:
   jackson:
     time-zone: Asia/Shanghai
 
-# https://www.cnblogs.com/charleswone/p/11437661.html
-user:
+user-info:
   name: zhangsan
   age: 50
-  birth: 1970/10/02 # 需要上面指明time-zone 否则会相差8个小时
+  marital: true
+  weight: 68.5
+  birth: 1970/10/02
+  email: asdf@qq.com
+  obj:
+    key1: va1
+    key2: va2
   hobby:
     - smoke
     - drink
@@ -20,11 +25,8 @@ user:
     - name: laifu
       breed: dog
   maps:
-    {
-      key1: {
-        "ck1": "cv1",
-        "ck2": 2
-      },
-      key2: "va2"
-    }
+    key1:
+      ck1: cv1
+      ck2: 2
+    key2: va2
 

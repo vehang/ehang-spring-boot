@@ -1,4 +1,4 @@
-package com.ehang.config.beans;
+package com.ehang.config.cp;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -17,13 +17,19 @@ import java.util.Map;
  */
 @Data
 @Component
-@ConfigurationProperties(prefix = "user")
-public class UserConfig {
+@ConfigurationProperties(prefix = "user-info")
+public class UserConfigByCP {
     private String name;
 
     private Integer age;
 
     private Date birth;
+
+    private String email;
+
+    private ObjConfig obj;
+
+    private String notFound;
 
     private List<String> hobby;
 
