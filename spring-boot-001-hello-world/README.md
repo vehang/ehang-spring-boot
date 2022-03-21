@@ -34,7 +34,7 @@ Spring Boot是由Pivotal团队提供的全新框架，其设计目的是用来�
 
 
 
-## 第一个StringBoot项目
+## 第一个StringBoot项目（单模块）
 
 > 本文示例代码：https://github.com/vehang/ehang-spring-boot/tree/main/spring-boot-001-hello-world
 
@@ -50,9 +50,11 @@ Spring Boot是由Pivotal团队提供的全新框架，其设计目的是用来�
 
 - 第三步，创建并下载项目包
 
-  ![image-20220313141703180](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220313141703180.png)
+  ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220313141703180.png)
 
-- 第四步，解压并导入项目![image-20220313142740465](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220313142740465.png)
+- 第四步，解压并导入项目
+
+  ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220313142740465.png)
 
 
 
@@ -80,7 +82,7 @@ Spring Boot是由Pivotal团队提供的全新框架，其设计目的是用来�
 
 
 
-## Hello World
+### Hello World
 
 - 添加依赖
 
@@ -122,7 +124,7 @@ Spring Boot是由Pivotal团队提供的全新框架，其设计目的是用来�
 
 
 
-## 打包
+### 单模块打包
 
 前面，通过IDEA工具，启动了服务，但是实际的使用中，需要打成Jar放在服务器运行；
 
@@ -154,15 +156,144 @@ Spring Boot是由Pivotal团队提供的全新框架，其设计目的是用来�
 
 
 
-到此，第一个SpringBoot项目配置完成！
+到此，第一个单模块的SpringBoot项目配置完成！
 
 
+
+## 多模块项目
+
+通常我们在开发微服务的时候，会将核心模块拆分为多个小的子模块，各自负责一块儿小的功能，来降低整个系统的耦合度；下面就以本教程项目的结构，来教大家如何创建一个多模块的项目，并完成配置及打包工作；
+
+部分结构的示例说明：
+
+- 父模块：ehang-spring-boot
+
+  - 公共模块：spring-boot-005-common
+  - 子模块：spring-boot-005-responce-exception  引入spring-boot-005-common
+  - 其他子模块...
+
+  ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220321124720490.png)
+
+
+
+### 创建多模块
+
+- New Module
+
+  选择父模块，右键，创建`New` --> `Module`
+
+  ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220321215941925.png)
+
+- 创建子模块
+
+  之后的步骤和前面通过IDEA创建项目的步骤一样；
+
+- 调整子模块的依赖
+
+  将父模块的groupId、版本等信息配置到子模块的<parent>中
+
+  ```xml
+  <parent>
+      <groupId>com.ehang</groupId>
+      <artifactId>ehang-spring-boot</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+      <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
+  </parent>
+  ```
+
+  ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220321222322133.png)
+
+- 父模块中添加<modules>
+
+  将子模块中的name配置到父模块的modules标签中
+
+  ```xml
+  <modules>
+      <module>spring-boot-005-common</module>
+      <module>spring-boot-005-responce-exception</module>
+  </modules>
+  ```
+
+  ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220321222649172.png)
+
+​		
+
+### 多模块打包
+
+#### 配置注意项
+
+- 子模块的<relativePath>
+
+  ```xml
+  <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
+  ```
+
+  ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220321223138978.png)
+
+- Maven插件
+
+  - 子模块配置上插件
+
+    ```xml
+    <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+    </plugin>
+    ```
+
+    ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220321223416762.png)
+
+  - 父模块移除Maven插件
+
+    ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220321223501731.png)
+
+  - 公共模块移除Maven插件
+
+    `spring-boot-005-common`为公共模块，用于提供给其他模块使用，不单独运行，需要移除Maven插件
+
+    ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220321223646144.png)
+
+  - 添加common模块的依赖
+
+    依赖了`common`的子模块，需要在pom.xml中添加common的依赖配置项
+
+    ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220321223828569.png)
+
+  - packaging配置为pom
+
+    ```xml
+    <packaging>pom</packaging>
+    ```
+
+    ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220321223951052.png)
+
+
+
+#### 打包
+
+```shell
+mvn clean package -Dmaven.test.skip=true
+```
+
+![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220321224421802.png)
+
+打包成功之后，各模块的目录下会出现一个`target`文件夹，里面回包含对应的jar包
+
+![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/image-20220321224551798.png)
+
+
+
+多模块和单模块的创建就讲解完了，有任何问题可以随时交流；
 
 最近在整理SpringBoot的学习教程，如果你也在学习SpringBoot，可以[点击查看](https://github.com/vehang/ehang-spring-boot)，期待您的Star
 
-> 本文示例教程：https://github.com/vehang/ehang-spring-boot/tree/main/spring-boot-001-hello-world
->
 > SpringBoot教程：https://github.com/vehang/ehang-spring-boot
 
 
+
+## 联系我
+
+| 公众号                                                       | 微信                                                         | 技术交流群                                                   |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/gzh_px_2022-03-21+23_04_24.png) | ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/wechat_px_2022-03-21+23_05_51.jpeg) | ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/group_px_2022-03-21+23_07_35.jpeg) |
 

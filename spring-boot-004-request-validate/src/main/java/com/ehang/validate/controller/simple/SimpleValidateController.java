@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SimpleValidateController {
 
     @PostMapping()
-    public void add(@Validated @RequestBody UserRequestDTO userRequestDTO) {
+    public String add(@Validated @RequestBody UserRequestDTO userRequestDTO) {
         /*
             请求 url：127.0.0.1:8084/simple
             请求body：
@@ -34,5 +34,7 @@ public class SimpleValidateController {
                 }
          */
         log.info("userRequestDTO:{}", JSON.toJSONString(userRequestDTO));
+
+        return "success";
     }
 }

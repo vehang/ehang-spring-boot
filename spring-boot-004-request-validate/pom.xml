@@ -6,7 +6,7 @@
         <groupId>com.ehang</groupId>
         <artifactId>ehang-spring-boot</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.ehang</groupId>
     <artifactId>spring-boot-004-request-validate</artifactId>
