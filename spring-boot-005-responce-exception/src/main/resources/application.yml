@@ -4,3 +4,5 @@ server:
 spring:
   jackson:
     default-property-inclusion: non_null # non_empty：不返回""和null  non_null：不返回null
+#    generator:
+#      write_numbers_as_strings: true #序列化的时候，将数值类型全部转换成字符串返回
