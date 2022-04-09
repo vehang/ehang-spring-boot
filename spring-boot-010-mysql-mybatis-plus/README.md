@@ -130,6 +130,8 @@
 
 - SpringBoot数据库配置
 
+  **以下的数据库`地址`及`端口`、`用户名`、`密码`请根据个人本地的实际情况修改**
+
   ```properties
   spring:
     application:
