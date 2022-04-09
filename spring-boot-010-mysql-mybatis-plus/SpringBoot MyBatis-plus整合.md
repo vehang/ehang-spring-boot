@@ -1699,7 +1699,7 @@ LIMIT 2
 
 最近在整理SpringBoot的学习教程，如果你也在学习SpringBoot，可以[点击查看](https://github.com/vehang/ehang-spring-boot)，欢迎交流！欢迎`star`
 
-> 本文示例教程：https://github.com/vehang/ehang-spring-boot/tree/main/spring-boot-007-profile
+> 本文示例教程：https://github.com/vehang/ehang-spring-boot/tree/main/spring-boot-010-mysql-mybatis-plus
 >
 > SpringBoot教程：https://github.com/vehang/ehang-spring-boot
 
