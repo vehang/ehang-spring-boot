@@ -3,7 +3,7 @@ package com.ehang.config.cp;
 import lombok.Data;
 
 /**
- * @author LENOVO
+ * @author ehang
  * @title: PetConfig
  * @projectName ehang-spring-boot
  * @description: TODO

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ehang.mysql.mybatis.plus.generator.school.mapper.SchoolInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.ehang.mysql.mybatis.plus.generator.school.demain.SchoolInfo">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="schoolName" column="school_name" jdbcType="VARCHAR"/>
+            <result property="schoolAddr" column="school_addr" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,school_name,school_addr
+    </sql>
+</mapper>

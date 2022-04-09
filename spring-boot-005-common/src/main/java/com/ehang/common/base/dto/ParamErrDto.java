@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
- * @author LENOVO
+ * @author ehang
  * @title: ParamErrDto
  * @projectName ehang-spring-boot
  * @description: TODO

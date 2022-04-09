@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ehang.mysql.mybatis.plus.generator.student.mapper.StudentInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.ehang.mysql.mybatis.plus.generator.student.demain.StudentInfo">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="studentId" column="student_id" jdbcType="VARCHAR"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="age" column="age" jdbcType="INTEGER"/>
+            <result property="classId" column="class_id" jdbcType="INTEGER"/>
+            <result property="schoolId" column="school_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,student_id,`name`,
+        age,class_id,school_id
+    </sql>
+
+    <select id="getStudentMap" resultType="java.util.HashMap">
+        select student_id , `name` , age
+        from student_info
+        order by id
+    </select>
+
+    <select id="getStudentList" resultType="com.ehang.mysql.mybatis.plus.generator.student.demain.StudentInfo">
+        select student_id , `name` , age
+        from student_info
+        order by id
+    </select>
+
+</mapper>

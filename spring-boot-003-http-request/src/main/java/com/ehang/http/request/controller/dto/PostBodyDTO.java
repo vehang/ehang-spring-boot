@@ -3,7 +3,7 @@ package com.ehang.http.request.controller.dto;
 import lombok.Data;
 
 /**
- * @author LENOVO
+ * @author ehang
  * @title: PostBodyDTO
  * @projectName ehang-spring-boot
  * @description: TODO

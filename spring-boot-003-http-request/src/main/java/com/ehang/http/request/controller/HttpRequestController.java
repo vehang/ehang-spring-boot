@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author LENOVO
+ * @author ehang
  * @title: HttpRequestController
  * @projectName ehang-spring-boot
  * @description: TODO

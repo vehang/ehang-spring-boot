@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 
 /**
- * @author LENOVO
+ * @author ehang
  * @title: UserInfoDto
  * @projectName ehang-spring-boot
  * @description: TODO

@@ -3,7 +3,7 @@ package com.ehang.config.value.spel;
 import java.util.Random;
 
 /**
- * @author LENOVO
+ * @author ehang
  * @title: RandomUtil
  * @projectName ehang-spring-boot
  * @description: TODO

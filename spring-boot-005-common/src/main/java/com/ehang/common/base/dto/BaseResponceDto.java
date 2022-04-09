@@ -7,7 +7,7 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 /**
- * @author LENOVO
+ * @author ehang
  * @title: BaseResponceDto
  * @projectName ehang-spring-boot
  * @description: TODO

@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
- * @author LENOVO
+ * @author ehang
  * @title: UserRequestDto
  * @projectName ehang-spring-boot
  * @description: TODO

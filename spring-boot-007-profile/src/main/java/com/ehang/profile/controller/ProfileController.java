@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author LENOVO
+ * @author ehang
  * @title: ProfileController
  * @projectName ehang-spring-boot
  * @description: TODO
