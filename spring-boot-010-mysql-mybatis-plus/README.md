@@ -111,6 +111,8 @@
 
 ## 数据库配置
 
+本文涉及到的表以及测试数据的sql脚本，[点击下载](https://github.com/vehang/ehang-spring-boot/tree/main/spring-boot-010-mysql-mybatis-plus/src/main/resources/sql/ehang.sql)
+
 - 数据库表
 
   一张简单的用户数据表
