@@ -285,7 +285,7 @@ mvn clean package -Dmaven.test.skip=true
 
 多模块和单模块的创建就讲解完了，有任何问题可以随时交流；
 
-最近在整理SpringBoot的学习教程，如果你也在学习SpringBoot，可以[点击查看](https://github.com/vehang/ehang-spring-boot)，期待您的Star
+最近在整理SpringBoot的学习教程，如果你也在学习SpringBoot，可以[点击查看](https://github.com/vehang/ehang-spring-boot)，欢迎交流！欢迎`star`
 
 > SpringBoot教程：https://github.com/vehang/ehang-spring-boot
 

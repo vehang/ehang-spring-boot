@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: prod #默认环境 如果不配置，默认项就是：dev
+  application:
+    name: spring-boot-007-profile # 项目名
+server:
+  port: 18088 # 端口
+

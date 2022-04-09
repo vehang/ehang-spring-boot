@@ -171,8 +171,20 @@ public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomiz
 
 三种方式都有各自适用的场景，相比而言，第一种和第三种用的相对普遍一点，可以根据自己的实际情况酌情选择；
 
-好了！如果你是Java从业者、或者正在学习Java，**欢迎扫文末的二维码加入技术交流群**；互相学习，一起进步。
 
+---
+
+最近在整理SpringBoot的学习教程，如果你也在学习SpringBoot，可以[点击查看](https://github.com/vehang/ehang-spring-boot)，欢迎交流！欢迎`star`
+
+> 本文示例教程：https://github.com/vehang/ehang-spring-boot/tree/main/spring-boot-005-responce-exception
+>
+> SpringBoot教程：https://github.com/vehang/ehang-spring-boot
+
+## 联系我
+
+| 公众号                                                       | 微信                                                         | 技术交流群                                                   |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/gzh_px_2022-03-21+23_04_24.png) | ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/wechat_px_2022-03-21+23_05_51.jpeg) | ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/group_px_2022-03-21+23_07_35.jpeg) |
 
 
 

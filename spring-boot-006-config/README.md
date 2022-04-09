@@ -602,11 +602,16 @@ private Map map;   // {"k1":"v1","k2":"v2"}
 
 `@Value`虽然用的多，但SpEL表达式确实出镜率不是特稿，究其原因，主要是并不需要在一个配置项上面写那么多复杂的表达式，来增加代码维护难度，同时有太多方式能够替换他了；但存在即合理，有些时候，一个表达式就能解决的问题，就不需要再去特殊处理，也挺不错的。
 
-最近正在整理SpringBoot的教程：https://github.com/vehang/ehang-spring-boot  欢迎Star
+---
 
-最近在整理SpringBoot的学习教程，如果你也在学习SpringBoot，欢迎交流！
+最近在整理SpringBoot的学习教程，如果你也在学习SpringBoot，可以[点击查看](https://github.com/vehang/ehang-spring-boot)，欢迎交流！欢迎`star`
 
 > 本文示例教程：https://github.com/vehang/ehang-spring-boot/tree/main/spring-boot-006-config
 >
 > SpringBoot教程：https://github.com/vehang/ehang-spring-boot
 
+## 联系我
+
+| 公众号                                                       | 微信                                                         | 技术交流群                                                   |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/gzh_px_2022-03-21+23_04_24.png) | ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/wechat_px_2022-03-21+23_05_51.jpeg) | ![](https://cdn.jsdelivr.net/gh/mbb2100/picgo_imgs/group_px_2022-03-21+23_07_35.jpeg) |
