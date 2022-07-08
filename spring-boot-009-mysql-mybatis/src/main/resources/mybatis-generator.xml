@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+    <!--id为上下文ID，可自行定义-->
+    <context id="Generator" targetRuntime="MyBatis3">
+
+        <!-- 数据库的相关配置 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.1.237:3306/ehang"
+                        userId="root" password="123456"/>
+
+        <!-- 数据库对象生成之后存放位置 -->
+        <!-- 这里的路径根据自己项目的情况修改 -->
+        <javaModelGenerator targetPackage="com.ehang.mysql.mybatis.domain" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- mapping映射文件的位置 -->
+        <!-- 这里的路径根据自己项目的情况修改 -->
+        <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- mapping接口文件的位置（dao接口） -->
+        <!-- 这里的路径根据自己项目的情况修改 -->
+        <!-- 客户端代码,生成易于使用的正对Model对象和XML配置文件的代码
+        type="ANNOTATEDMAPPER", 生成Java Model和基于注解的Mapper对象
+        type="MIXEDMAPPER", 生成基于注解的Java Model和相应的Mapper对象
+        type="XMLMAPPER", 生成SQLMap XML文件和独立的Mapper接口
+        -->
+        <javaClientGenerator targetPackage="com.ehang.mysql.mybatis.dao" targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!-- 相关表的配置 -->
+        <table tableName="user_info" domainObjectName="UserDO" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false"/>
+    </context>
+</generatorConfiguration>
