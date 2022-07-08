@@ -1,0 +1,1 @@
+本文示例教程请参考[满屏的get & set 太Low了？试试 MapStruct 高级玩法](https://mp.weixin.qq.com/s/Dm9G6n4rng4ME-Lfbx0KFQ)

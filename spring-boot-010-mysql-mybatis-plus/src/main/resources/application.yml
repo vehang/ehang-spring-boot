@@ -1,61 +1,61 @@
 mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #¿ªÆôsqlÈÕÖ¾
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #å¼€å¯sqlæ—¥å¿—
     map-underscore-to-camel-case: true
-    # ¸ÃÅäÖÃ¾ÍÊÇ½«´øÓĞÏÂ»®ÏßµÄ±í×Ö¶ÎÓ³ÉäÎªÍÕ·å¸ñÊ½µÄÊµÌåÀàÊôĞÔ
+    # è¯¥é…ç½®å°±æ˜¯å°†å¸¦æœ‰ä¸‹åˆ’çº¿çš„è¡¨å­—æ®µæ˜ å°„ä¸ºé©¼å³°æ ¼å¼çš„å®ä½“ç±»å±æ€§
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.ehang
 
 spring:
   application:
     name: spring-boot-010-mysql-mybatis-plus
-  #Êı¾İ¿âÁ¬½ÓÏà¹ØÅäÖÃ
+  #æ•°æ®åº“è¿æ¥ç›¸å…³é…ç½®
   datasource:
     url: jdbc:mysql://192.168.1.237:3306/ehang?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=GMT%2B8&useSSL=false
     username: root
     password: 123456
-    #°¢Àï°Í°ÍµÄdruidµÄmysqlÁ¬½Ó³Ø
+    #é˜¿é‡Œå·´å·´çš„druidçš„mysqlè¿æ¥æ± 
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
     druid:
-      #Á¬½Ó³ØµÄÅäÖÃĞÅÏ¢
-      #³õÊ¼»¯´óĞ¡£¬×îĞ¡£¬×î´ó
+      #è¿æ¥æ± çš„é…ç½®ä¿¡æ¯
+      #åˆå§‹åŒ–å¤§å°ï¼Œæœ€å°ï¼Œæœ€å¤§
       initial-size: 5
       min-idle: 5
       maxActive:  20
-      #ÅäÖÃ»ñÈ¡Á¬½ÓµÈ´ı³¬Ê±µÄÊ±¼ä
+      #é…ç½®è·å–è¿æ¥ç­‰å¾…è¶…æ—¶çš„æ—¶é—´
       maxWait:  60000
-      #ÅäÖÃ¼ä¸ô¶à¾Ã²Å½øĞĞÒ»´Î¼ì²â£¬¼ì²âĞèÒª¹Ø±ÕµÄ¿ÕÏĞÁ¬½Ó£¬µ¥Î»ÊÇºÁÃë
+      #é…ç½®é—´éš”å¤šä¹…æ‰è¿›è¡Œä¸€æ¬¡æ£€æµ‹ï¼Œæ£€æµ‹éœ€è¦å…³é—­çš„ç©ºé—²è¿æ¥ï¼Œå•ä½æ˜¯æ¯«ç§’
       timeBetweenEvictionRunsMillis:  60000
-      #ÅäÖÃÒ»¸öÁ¬½ÓÔÚ³ØÖĞ×îĞ¡Éú´æµÄÊ±¼ä£¬µ¥Î»ÊÇºÁÃë
+      #é…ç½®ä¸€ä¸ªè¿æ¥åœ¨æ± ä¸­æœ€å°ç”Ÿå­˜çš„æ—¶é—´ï¼Œå•ä½æ˜¯æ¯«ç§’
       minEvictableIdleTimeMillis: 300000
       validationQuery:  SELECT 1 FROM DUAL
       testWhileIdle:  true
       testOnBorrow: false
       testOnReturn: false
-      #´ò¿ªPSCache£¬²¢ÇÒÖ¸¶¨Ã¿¸öÁ¬½ÓÉÏPSCacheµÄ´óĞ¡
+      #æ‰“å¼€PSCacheï¼Œå¹¶ä¸”æŒ‡å®šæ¯ä¸ªè¿æ¥ä¸ŠPSCacheçš„å¤§å°
       poolPreparedStatements: true
       maxPoolPreparedStatementPerConnectionSize:  20
-      #ÅäÖÃ¼à¿ØÍ³¼ÆÀ¹½ØµÄfilters£¬È¥µôºó¼à¿Ø½çÃæsqlÎŞ·¨Í³¼Æ£¬'wall'ÓÃÓÚ·À»ğÇ½
+      #é…ç½®ç›‘æ§ç»Ÿè®¡æ‹¦æˆªçš„filtersï¼Œå»æ‰åç›‘æ§ç•Œé¢sqlæ— æ³•ç»Ÿè®¡ï¼Œ'wall'ç”¨äºé˜²ç«å¢™
       #      filters: stat,wall,log4j
-      #Í¨¹ıconnectPropertiesÊôĞÔÀ´´ò¿ªmergeSql¹¦ÄÜ£»ÂıSQL¼ÇÂ¼
+      #é€šè¿‡connectPropertieså±æ€§æ¥æ‰“å¼€mergeSqlåŠŸèƒ½ï¼›æ…¢SQLè®°å½•
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-      #ÅäÖÃDruidStatFilter
+      #é…ç½®DruidStatFilter
       web-stat-filter:
         enabled:  true
         url-pattern:  "/*"
         exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"
-      #ÅäÖÃDruidStatViewServlet
+      #é…ç½®DruidStatViewServlet
       stat-view-servlet:
         url-pattern:  "/druid/*"
-        #IP°×Ãûµ¥(Ã»ÓĞÅäÖÃ»òÕßÎª¿Õ£¬ÔòÔÊĞíËùÓĞ·ÃÎÊ)
+        #IPç™½åå•(æ²¡æœ‰é…ç½®æˆ–è€…ä¸ºç©ºï¼Œåˆ™å…è®¸æ‰€æœ‰è®¿é—®)
         allow:  127.0.0.1,192.168.1.123
-        #IPºÚÃûµ¥(´æÔÚ¹²Í¬Ê±£¬denyÓÅÏÈÓÚallow)
+        #IPé»‘åå•(å­˜åœ¨å…±åŒæ—¶ï¼Œdenyä¼˜å…ˆäºallow)
         deny: 192.168.1.124
-        #½ûÓÃHTMLÒ³ÃæÉÏµÄ¡°ResetAll¡±¹¦ÄÜ
+        #ç¦ç”¨HTMLé¡µé¢ä¸Šçš„â€œResetAllâ€åŠŸèƒ½
         reset-enable: false
-        #µÇÂ¼Ãû
+        #ç™»å½•å
         login-username: admin
-        #µÇÂ¼ÃÜÂë
+        #ç™»å½•å¯†ç 
         login-password: 123456
       connectionInitSqls : ["set names utf8mb4;"]
