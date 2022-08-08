@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ehang.mysql.mybatis.plus.generator.test.mapper.InfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.ehang.mysql.mybatis.plus.generator.test.domain.InfoDomain">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="name" column="user_name" jdbcType="VARCHAR"/>
+            <result property="age" column="age" jdbcType="INTEGER"/>
+            <result property="source" column="source" jdbcType="TINYINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_name,age,
+        source,create_time
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from user_info
+        where  id = #{id,jdbcType=INTEGER} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from user_info
+        where  id = #{id,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.ehang.mysql.mybatis.plus.generator.test.domain.InfoDomain" useGeneratedKeys="true">
+        insert into user_info
+        ( id,user_name,age
+        ,source,create_time)
+        values (#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},#{age,jdbcType=INTEGER}
+        ,#{source,jdbcType=TINYINT},#{createTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.ehang.mysql.mybatis.plus.generator.test.domain.InfoDomain" useGeneratedKeys="true">
+        insert into user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="name != null">user_name,</if>
+                <if test="age != null">age,</if>
+                <if test="source != null">source,</if>
+                <if test="createTime != null">create_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null"> #{id,jdbcType=INTEGER},</if>
+                <if test="name != null"> #{name,jdbcType=VARCHAR},</if>
+                <if test="age != null"> #{age,jdbcType=INTEGER},</if>
+                <if test="source != null"> #{source,jdbcType=TINYINT},</if>
+                <if test="createTime != null"> #{createTime,jdbcType=TIMESTAMP},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ehang.mysql.mybatis.plus.generator.test.domain.InfoDomain">
+        update user_info
+        <set>
+                <if test="name != null">
+                    user_name = #{name,jdbcType=VARCHAR},
+                </if>
+                <if test="age != null">
+                    age = #{age,jdbcType=INTEGER},
+                </if>
+                <if test="source != null">
+                    source = #{source,jdbcType=TINYINT},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ehang.mysql.mybatis.plus.generator.test.domain.InfoDomain">
+        update user_info
+        set 
+            user_name =  #{name,jdbcType=VARCHAR},
+            age =  #{age,jdbcType=INTEGER},
+            source =  #{source,jdbcType=TINYINT},
+            create_time =  #{createTime,jdbcType=TIMESTAMP}
+        where   id = #{id,jdbcType=INTEGER} 
+    </update>
+</mapper>
