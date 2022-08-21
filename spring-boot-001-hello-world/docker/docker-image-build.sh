@@ -1,3 +1,4 @@
+rm -rf ./tmp
 mkdir ./tmp
 
 cp ./spring-boot-001-hello-world/docker/* ./tmp
