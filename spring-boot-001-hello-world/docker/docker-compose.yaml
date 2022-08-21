@@ -1,0 +1,12 @@
+version: '2'
+services:
+  ehang-hello-world:
+    container_name: ehang-hello-world
+    image: registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/ehang-sping-boot-hello-world:latest
+    restart: always
+    volumes:
+      - /opt/ehang:/opt/ehang
+    ports:
+      - "8081:8081"
+    environment:
+      - --spring.profiles.active=dev
