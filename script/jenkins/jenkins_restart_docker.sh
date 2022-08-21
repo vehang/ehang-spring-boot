@@ -8,7 +8,22 @@ BASE_PATH=$1
 echo "基础路径:"$BASE_PATH
 DOCKER_COMPOSE_FILES=${BASE_PATH}/docker/docker-compose.yaml
 
-# 获取所有的JAR 开始遍历
+DOCKER_PULL_SHELL=${BASE_PATH}/docker-image-pull.sh
+
+# 获取最新的镜像
+for PULL_SHELL in DOCKER_PULL_SHELL
+do
+if [ -f $PULL_SHELL ]
+then
+  echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+  echo "更新最新的镜像:"$PULL_SHELL
+  sh $PULL_SHELL
+  echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
+  echo ""
+fi
+done
+
+# 启动镜像 
 for DOCKER_COMPOSE_FILE in $DOCKER_COMPOSE_FILES
 do
 if [ -f $DOCKER_COMPOSE_FILE ]
