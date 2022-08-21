@@ -8,7 +8,7 @@ BASE_PATH=$1
 echo "基础路径:"$BASE_PATH
 DOCKER_COMPOSE_FILES=${BASE_PATH}/docker/docker-compose.yaml
 
-DOCKER_PULL_SHELL=${BASE_PATH}/docker-image-pull.sh
+DOCKER_PULL_SHELL=${BASE_PATH}/docker/docker-image-pull.sh
 
 # 获取最新的镜像
 for PULL_SHELL in $DOCKER_PULL_SHELL
