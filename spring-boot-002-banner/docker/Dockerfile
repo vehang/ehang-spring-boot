@@ -8,7 +8,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ADD ./*.jar /app.jar
 
 # 监听端口
-EXPOSE 8081
+EXPOSE 8082
 
 # 启动
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom" \

@@ -1,0 +1,12 @@
+version: '2'
+services:
+  spring-boot-banner:
+    container_name: spring-boot-banner
+    image: registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/ehang-spring-boot-banner:latest
+    restart: always
+    volumes:
+      - /opt/ehang:/opt/ehang
+    ports:
+      - "8082:8082"
+    environment:
+      - --spring.profiles.active=dev
