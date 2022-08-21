@@ -11,7 +11,7 @@ DOCKER_COMPOSE_FILES=${BASE_PATH}/docker/docker-compose.yaml
 DOCKER_PULL_SHELL=${BASE_PATH}/docker-image-pull.sh
 
 # 获取最新的镜像
-for PULL_SHELL in DOCKER_PULL_SHELL
+for PULL_SHELL in $DOCKER_PULL_SHELL
 do
 if [ -f $PULL_SHELL ]
 then
@@ -23,7 +23,7 @@ then
 fi
 done
 
-# 启动镜像 
+# 启动镜像
 for DOCKER_COMPOSE_FILE in $DOCKER_COMPOSE_FILES
 do
 if [ -f $DOCKER_COMPOSE_FILE ]
