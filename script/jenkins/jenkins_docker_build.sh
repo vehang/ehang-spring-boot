@@ -2,7 +2,7 @@
 
 BUILD_SHELL_PATH=./*/docker/docker-image-build.sh
 
-# 获取所有的JAR 开始遍历
+# 获取所有的构建脚本 开始遍历
 for BUILD_SHELL in $BUILD_SHELL_PATH
 do
 if [ -f $BUILD_SHELL ]
