@@ -5,8 +5,12 @@ mkdir -p ${MODULE_TMP_PATH}
 
 # 项目的临时文件目录
 MODULE_TMP_PATH=${MODULE_BATH_PATH}/tmp
+mkdir -p ${MODULE_TMP_PATH}
+
 # 项目的lib目录 用于保存项目所有赖
 MODULE_LIB_TMP_PATH=${MODULE_TMP_PATH}/lib
+mkdir -p ${MODULE_LIB_TMP_PATH}
+
 # jar解压之后的目录
 MODULE_UNZIP_TMP_PATH=${MODULE_TMP_PATH}/jar_unzip_tmp
 # 用于保存解压有的jar包中文件的详情及MD5值
