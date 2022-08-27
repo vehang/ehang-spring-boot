@@ -38,6 +38,8 @@ then
   #    `md5sum $file >> $JAR_FILES_INFO`
   #  fi
   #done
+  # 删除解压后的文件
+  rm -rf $JAR_UNZIP_PATH
 
   # 用于标记是否需要重启的标识
   RESTART=false
