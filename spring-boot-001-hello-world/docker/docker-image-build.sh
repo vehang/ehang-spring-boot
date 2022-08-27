@@ -1,15 +1,14 @@
 # 考虑到多模块的情况 这里创建一个临时目录，来汇总配置
 # 项目目录
 MODULE_BATH_PATH=./spring-boot-001-hello-world
-mkdir -p "${MODULE_TMP_PATH}"
-
+mkdir -p $MODULE_TMP_PATH
 # 项目的临时文件目录
 MODULE_TMP_PATH=${MODULE_BATH_PATH}/tmp
-mkdir -p "${MODULE_TMP_PATH}"
+mkdir -p $MODULE_TMP_PATH
 
 # 项目的lib目录 用于保存项目所有赖
 MODULE_LIB_TMP_PATH=${MODULE_TMP_PATH}/lib
-mkdir -p "${MODULE_LIB_TMP_PATH}"
+mkdir -p $MODULE_LIB_TMP_PATH
 
 # jar解压之后的目录
 MODULE_UNZIP_TMP_PATH=${MODULE_TMP_PATH}/jar_unzip_tmp
