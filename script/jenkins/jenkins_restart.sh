@@ -12,9 +12,7 @@ JAR_BATH=$1
 echo "基础路径:"$JAR_BATH
 JAR_PATH=${JAR_BATH}/target/*.jar
 
-# 多模块的包
-#JAR_BATH=/opt/jenkins/package
-#JAR_PATH=${JAR_BATH}/*/*/*.jar
+JAR_UNZIP_PATH=/tmp/jar_unzip_tmp
 
 # 获取所有的JAR 开始遍历
 for JAR_FILE in $JAR_PATH
@@ -23,15 +21,31 @@ if [ -f $JAR_FILE ]
 then
   echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
   echo "JAR路径:"$JAR_FILE
-  JAR_FILE_MD5=${JAR_FILE}.md5
+  #JAR_FILE_MD5=${JAR_FILE}.md5
+
+  # 保存jar包中MD5及文件目录的详情
+  JAR_FILES_INFO=${JAR_FILE}_files
+  JAR_FILES_INFO_MD5=${JAR_FILES_INFO}.md5
+
+  unzip $JAR_FILE -d $JAR_UNZIP_PATH
+  # 遍历解压目录，计算每个文件的MD5值
+  find $JAR_UNZIP_PATH -type f -print | xargs md5sum > $JAR_FILES_INFO
+  # 上面的这条命令等价于下面这个for循环
+  #for file in `find $JAR_UNZIP_PATH`
+  #do
+  #  if [ -f $file ];then
+  #    echo $file
+  #    `md5sum $file >> $JAR_FILES_INFO`
+  #  fi
+  #done
 
   # 用于标记是否需要重启的标识
   RESTART=false
 
   # 判断MD5文件是否存在，存在就校验MD5值
-  if [ -f $JAR_FILE_MD5 ]; then
+  if [ -f $JAR_FILES_INFO_MD5 ]; then
     # 校验MD5
-    md5sum --status -c $JAR_FILE_MD5
+    md5sum --status -c $JAR_FILES_INFO_MD5
     # = 0表示校验成功 =1 表示校验失败
     if [ $? = 1 ];then
       echo "MD5校验失败,安装包已经更新！"
@@ -60,7 +74,7 @@ then
       #如果出现Jenins Job执行完之后，进程被jenkins杀死，可尝试放开此配置项
       #BUILD_ID=dontKillMe
       #启动Jar
-      nohup java -jar $JAR_FILE  > ${JAR_FILE}.log 2>&1 &
+      nohup java -jar $JAR_FILE > ${JAR_FILE}.log 2>&1 &
       # =0 启动成功 =1 启动失败
       if [ $? == 0 ];then
           echo "restart success!!! process id:" `ps -ef | grep $JAR_FILE | grep -v grep | awk '{print $2}'`
@@ -69,7 +83,7 @@ then
       fi
 
       # 将最新的MD5值写入到缓存文件
-      echo `md5sum $JAR_FILE` > $JAR_FILE_MD5
+      md5sum $JAR_FILES_INFO > $JAR_FILES_INFO_MD5
   fi
   echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
   echo ""
