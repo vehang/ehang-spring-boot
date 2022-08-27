@@ -26,8 +26,7 @@ if [ -d ${MODULE_BATH_PATH}/target/lib/ ]; then
   echo "拷贝lib"
   \cp -r ${MODULE_BATH_PATH}/target/lib/* ${MODULE_LIB_TMP_PATH}
 fi
-# 进入目录tmp目录
-cd ${MODULE_BATH_PATH}
+
 
 # 讲jar解压到指定的解压目录
 unzip ${MODULE_TMP_PATH}/app.jar -d ${MODULE_UNZIP_TMP_PATH}
@@ -52,8 +51,10 @@ else
 fi
 
 if [ $UPDATE == true ]; then
+  # 进入目录tmp目录
+  #cd $MODULE_TMP_PATH
   # 构建镜像
-  docker build -t registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/ehang-sping-boot-hello-world:latest .
+  docker build -t registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/ehang-sping-boot-hello-world:latest ${MODULE_TMP_PATH}/.
   # 将镜像推送到埃利园
   docker push registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/ehang-sping-boot-hello-world:latest
 
