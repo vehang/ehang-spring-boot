@@ -1,17 +1,58 @@
 # 考虑到多模块的情况 这里创建一个临时目录，来汇总配置
-rm -rf ./tmp
-mkdir ./tmp
+# 项目目录
+MODULE_BATH_PATH=./spring-boot-001-hello-world
+if[ ! -d $MODULE_BATH_PATH ];then
+  mkdir ${MODULE_TMP_PATH}
+fi
 
-# 将脚本 jar包拷贝的临时目录中
-cp ./spring-boot-001-hello-world/docker/* ./tmp
-cp ./spring-boot-001-hello-world/target/*.jar ./tmp
-cd ./tmp
+# 项目的临时文件目录
+MODULE_TMP_PATH=${MODULE_BATH_PATH}/tmp
+# 项目的lib目录 用于保存项目所有赖
+MODULE_LIB_TMP_PATH=${MODULE_TMP_PATH}/lib
+# jar解压之后的目录
+MODULE_UNZIP_TMP_PATH=${MODULE_TMP_PATH}/jar_unzip_tmp
+# 用于保存解压有的jar包中文件的详情及MD5值
+JAR_FILES_INFO=${MODULE_TMP_PATH}/jar_files
+# 详情文件的MD5信息
+JAR_FILES_INFO_MD5=${JAR_FILES_INFO}.md5
 
-# 构建镜像
-docker build -t registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/ehang-sping-boot-hello-world:latest .
-# 将镜像推送到埃利园
-docker push registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/ehang-sping-boot-hello-world:latest
+# 将脚本 jar包拷贝的临时目录中 强制复制
+\cp ${MODULE_BATH_PATH}/docker/* ${MODULE_TMP_PATH}
+# 拷贝jar
+\cp ${MODULE_BATH_PATH}/target/*.jar ${MODULE_TMP_PATH}
+# 拷贝lib
+\cp ${MODULE_BATH_PATH}/lib/* ${MODULE_LIB_TMP_PATH}
+# 进入目录tmp目录
+cd ${MODULE_BATH_PATH}
 
+# 讲jar解压到指定的解压目录
+unzip ${MODULE_TMP_PATH}/*.jar -d MODULE_UNZIP_TMP_PATH
+# 查找并输出所有的
+find $JAR_UNZIP_PATH -type f -print | xargs md5sum > $JAR_FILES_INFO
+
+
+UPDATE=false
+if [ -f $JAR_FILES_INFO_MD5 ]; then
+  # 校验MD5
+  md5sum --status -c $JAR_FILES_INFO_MD5
+  # = 0表示校验成功 =1 表示校验失败
+  if [ $? = 1 ];then
+    echo "MD5校验失败,安装包已经更新！需要构建镜像"
+    UPDATE=true
+  else
+    echo "与前一次的MD5匹配成功，说明安装包没有更新！"
+  fi
+else
+  echo "没有MD5值，说明是第一次构建"
+  UPDATE=true
+fi
+
+if [ $RESTART == true ]; then
+  # 构建镜像
+  docker build -t registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/ehang-sping-boot-hello-world:latest .
+  # 将镜像推送到埃利园
+  docker push registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/ehang-sping-boot-hello-world:latest
+fi
 # 删除临时文件
-cd ..
-rm -rf ./tmp
+# cd ..
+# rm -rf ./tmp
