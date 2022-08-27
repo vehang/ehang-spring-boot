@@ -27,12 +27,12 @@ if [ -d ${MODULE_BATH_PATH}/target/lib/ ]; then
   \cp -r ${MODULE_BATH_PATH}/target/lib/* ${MODULE_LIB_TMP_PATH}
 fi
 
-
+rm -rf ${MODULE_UNZIP_TMP_PATH}
 # 讲jar解压到指定的解压目录
 unzip ${MODULE_TMP_PATH}/app.jar -d ${MODULE_UNZIP_TMP_PATH}
 # 查找并输出所有的
 find $JAR_UNZIP_PATH -type f -print | xargs md5sum > $JAR_FILES_INFO
-
+rm -rf ${MODULE_UNZIP_TMP_PATH}
 
 UPDATE=false
 if [ -f $JAR_FILES_INFO_MD5 ]; then
