@@ -21,14 +21,17 @@ JAR_FILES_INFO_MD5=${JAR_FILES_INFO}.md5
 # 将脚本 jar包拷贝的临时目录中 强制复制
 \cp -r ${MODULE_BATH_PATH}/docker/* ${MODULE_TMP_PATH}
 # 拷贝jar
-\cp -r ${MODULE_BATH_PATH}/target/*.jar ${MODULE_TMP_PATH}
+\cp -r ${MODULE_BATH_PATH}/target/*.jar ${MODULE_TMP_PATH}/app.jar
 # 拷贝lib
-\cp -r ${MODULE_BATH_PATH}/lib/* ${MODULE_LIB_TMP_PATH}
+if [ -d ${MODULE_BATH_PATH}/target/lib/ ]; then
+  echo "拷贝lib"
+  \cp -r ${MODULE_BATH_PATH}/target/lib/* ${MODULE_LIB_TMP_PATH}
+fi
 # 进入目录tmp目录
 cd ${MODULE_BATH_PATH}
 
 # 讲jar解压到指定的解压目录
-unzip ${MODULE_TMP_PATH}/*.jar -d ${MODULE_UNZIP_TMP_PATH}
+unzip ${MODULE_TMP_PATH}/app.jar -d ${MODULE_UNZIP_TMP_PATH}
 # 查找并输出所有的
 find $JAR_UNZIP_PATH -type f -print | xargs md5sum > $JAR_FILES_INFO
 
