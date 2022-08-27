@@ -1,15 +1,15 @@
 # 考虑到多模块的情况 这里创建一个临时目录，来汇总配置
 # 项目目录
 MODULE_BATH_PATH=./spring-boot-001-hello-world
-mkdir -p ${MODULE_TMP_PATH}
+mkdir -p "${MODULE_TMP_PATH}"
 
 # 项目的临时文件目录
 MODULE_TMP_PATH=${MODULE_BATH_PATH}/tmp
-mkdir -p ${MODULE_TMP_PATH}
+mkdir -p "${MODULE_TMP_PATH}"
 
 # 项目的lib目录 用于保存项目所有赖
 MODULE_LIB_TMP_PATH=${MODULE_TMP_PATH}/lib
-mkdir -p ${MODULE_LIB_TMP_PATH}
+mkdir -p "${MODULE_LIB_TMP_PATH}"
 
 # jar解压之后的目录
 MODULE_UNZIP_TMP_PATH=${MODULE_TMP_PATH}/jar_unzip_tmp
@@ -19,16 +19,16 @@ JAR_FILES_INFO=${MODULE_TMP_PATH}/jar_files
 JAR_FILES_INFO_MD5=${JAR_FILES_INFO}.md5
 
 # 将脚本 jar包拷贝的临时目录中 强制复制
-\cp ${MODULE_BATH_PATH}/docker/* ${MODULE_TMP_PATH}
+\cp -r ${MODULE_BATH_PATH}/docker/* ${MODULE_TMP_PATH}
 # 拷贝jar
-\cp ${MODULE_BATH_PATH}/target/*.jar ${MODULE_TMP_PATH}
+\cp -r ${MODULE_BATH_PATH}/target/*.jar ${MODULE_TMP_PATH}
 # 拷贝lib
-\cp ${MODULE_BATH_PATH}/lib/* ${MODULE_LIB_TMP_PATH}
+\cp -r ${MODULE_BATH_PATH}/lib/* ${MODULE_LIB_TMP_PATH}
 # 进入目录tmp目录
 cd ${MODULE_BATH_PATH}
 
 # 讲jar解压到指定的解压目录
-unzip ${MODULE_TMP_PATH}/*.jar -d MODULE_UNZIP_TMP_PATH
+unzip ${MODULE_TMP_PATH}/*.jar -d ${MODULE_UNZIP_TMP_PATH}
 # 查找并输出所有的
 find $JAR_UNZIP_PATH -type f -print | xargs md5sum > $JAR_FILES_INFO
 
