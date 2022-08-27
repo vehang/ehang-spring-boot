@@ -54,7 +54,7 @@ then
       echo "MD5校验失败,安装包已经更新！"
       RESTART=true
     else
-      echo "安装包没有更新！"
+      echo "与前一次的MD5匹配成功，说明安装包没有更新！"
     fi
   else
     echo "没有MD5值，说明是第一次启动"
