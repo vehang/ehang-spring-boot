@@ -38,7 +38,7 @@ if [ -f $JAR_FILES_INFO_MD5 ]; then
     echo "MD5校验失败,安装包已经更新！需要构建镜像"
     UPDATE=true
   else
-    echo "与前一次的MD5匹配成功，说明安装包没有更新！"
+    echo "与前一次的MD5匹配成功，说明安装包没有更新，无需重新构建！"
   fi
 else
   echo "没有MD5值，说明是第一次构建"
@@ -50,6 +50,9 @@ if [ $UPDATE == true ]; then
   docker build -t registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/ehang-sping-boot-hello-world:latest .
   # 将镜像推送到埃利园
   docker push registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/ehang-sping-boot-hello-world:latest
+
+  # 将最新的MD5值写入到缓存文件
+  md5sum $JAR_FILES_INFO > $JAR_FILES_INFO_MD5
 fi
 # 删除临时文件
 # cd ..
