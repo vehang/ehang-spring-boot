@@ -62,6 +62,7 @@ if [ $UPDATE = true ]; then
   echo $JAR_FILES_INFO
   echo $JAR_FILES_INFO_MD5
   echo `md5sum $JAR_FILES_INFO` > $JAR_FILES_INFO_MD5
+  rm -rf $JAR_FILES_INFO
 fi
 # 删除临时文件
 # cd ..
