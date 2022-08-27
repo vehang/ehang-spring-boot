@@ -1,5 +1,6 @@
 # 考虑到多模块的情况 这里创建一个临时目录，来汇总配置
 # 项目目录
+MODULE_DOCKER_IMAGE_NAME=ehang-sping-boot-hello-world
 MODULE_BATH_PATH=./spring-boot-001-hello-world
 mkdir -p $MODULE_TMP_PATH
 # 项目的临时文件目录
@@ -31,7 +32,7 @@ rm -rf ${MODULE_UNZIP_TMP_PATH}
 # 讲jar解压到指定的解压目录
 unzip ${MODULE_TMP_PATH}/app.jar -d ${MODULE_UNZIP_TMP_PATH}
 # 查找并输出所有的
-find $JAR_UNZIP_PATH -type f -print | xargs md5sum > $JAR_FILES_INFO
+find $MODULE_UNZIP_TMP_PATH -type f -print | xargs md5sum > $JAR_FILES_INFO
 rm -rf ${MODULE_UNZIP_TMP_PATH}
 
 UPDATE=false
@@ -54,15 +55,15 @@ if [ $UPDATE = true ]; then
   # 进入目录tmp目录
   #cd $MODULE_TMP_PATH
   # 构建镜像
-  docker build -t registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/ehang-sping-boot-hello-world:latest ${MODULE_TMP_PATH}/.
+  docker build -t registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/${MODULE_DOCKER_IMAGE_NAME}:latest ${MODULE_TMP_PATH}/.
   # 将镜像推送到埃利园
-  docker push registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/ehang-sping-boot-hello-world:latest
+  docker push registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/${MODULE_DOCKER_IMAGE_NAME}:latest
 
   # 将最新的MD5值写入到缓存文件
   echo $JAR_FILES_INFO
   echo $JAR_FILES_INFO_MD5
   echo `md5sum $JAR_FILES_INFO` > $JAR_FILES_INFO_MD5
-  rm -rf $JAR_FILES_INFO
+  #rm -rf $JAR_FILES_INFO
 fi
 # 删除临时文件
 # cd ..
