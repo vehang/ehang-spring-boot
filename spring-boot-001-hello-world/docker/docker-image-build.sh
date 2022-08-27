@@ -50,7 +50,7 @@ else
   UPDATE=true
 fi
 
-if [ $UPDATE == true ]; then
+if [ $UPDATE = true ]; then
   # 进入目录tmp目录
   #cd $MODULE_TMP_PATH
   # 构建镜像
@@ -59,7 +59,9 @@ if [ $UPDATE == true ]; then
   docker push registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/ehang-sping-boot-hello-world:latest
 
   # 将最新的MD5值写入到缓存文件
-  md5sum $JAR_FILES_INFO > $JAR_FILES_INFO_MD5
+  echo $JAR_FILES_INFO
+  echo $JAR_FILES_INFO_MD5
+  echo `md5sum $JAR_FILES_INFO` > $JAR_FILES_INFO_MD5
 fi
 # 删除临时文件
 # cd ..
