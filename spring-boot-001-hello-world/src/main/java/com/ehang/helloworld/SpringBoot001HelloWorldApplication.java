@@ -10,7 +10,7 @@ public class SpringBoot001HelloWorldApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringBoot001HelloWorldApplication.class, args);
-        log.info("启动成功！！测试变更！");
+        log.info("启动成功！！");
     }
 
 }

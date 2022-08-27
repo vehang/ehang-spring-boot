@@ -1,4 +1,4 @@
-# 考虑到多模块的情况 这里创建一个临时目录，来汇总配置
+# 考虑到多模块的情况 这里创建一个临时目录，来汇总配置、Jar、解压目录等
 # 项目目录
 MODULE_DOCKER_IMAGE_NAME=ehang-spring-boot-banner
 MODULE_BATH_PATH=./spring-boot-002-banner

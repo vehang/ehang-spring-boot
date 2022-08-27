@@ -12,6 +12,7 @@ JAR_BATH=$1
 echo "基础路径:"$JAR_BATH
 JAR_PATH=${JAR_BATH}/target/*.jar
 
+# 临时的解压目录
 JAR_UNZIP_PATH=/tmp/jar_unzip_tmp
 
 # 获取所有的JAR 开始遍历
@@ -23,14 +24,16 @@ then
   echo "JAR路径:"$JAR_FILE
   #JAR_FILE_MD5=${JAR_FILE}.md5
 
-  # 保存jar包中MD5及文件目录的详情
+  # 解压目录的文件列表详情及MD5
   JAR_FILES_INFO=${JAR_FILE}_files
+  # 详情列表文件的MD5详细
   JAR_FILES_INFO_MD5=${JAR_FILES_INFO}.md5
 
   # 删除解压后的临时文件夹 避免之前的缓存导致解压失败
   rm -rf $JAR_UNZIP_PATH
+  # 解压文件
   unzip $JAR_FILE -d $JAR_UNZIP_PATH
-  # 遍历解压目录，计算每个文件的MD5值
+  # 遍历解压目录，计算每个文件的MD5值及路径 输出到详情列表文件中
   find $JAR_UNZIP_PATH -type f -print | xargs md5sum > $JAR_FILES_INFO
   # 上面的这条命令等价于下面这个for循环
   #for file in `find $JAR_UNZIP_PATH`
@@ -61,7 +64,7 @@ then
     RESTART=true
   fi
 
-  # 获取进程号
+  # 获取进程号 判断当前服务是否启动；如果Jar没变，但是服务未启动，也需要执行启动脚本
   PROCESS_ID=`ps -ef | grep $JAR_FILE | grep -v grep | awk '{print $2}'`
   # 如果不需要重启，但是进程号没有，说明当前jar没有启动，同样也需要启动一下
   if [ $RESTART == false ] && [ ${#PROCESS_ID} == 0 ] ;then
