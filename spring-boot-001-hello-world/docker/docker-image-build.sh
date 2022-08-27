@@ -1,9 +1,7 @@
 # 考虑到多模块的情况 这里创建一个临时目录，来汇总配置
 # 项目目录
 MODULE_BATH_PATH=./spring-boot-001-hello-world
-if[ ! -d $MODULE_BATH_PATH ];then
-  mkdir ${MODULE_TMP_PATH}
-fi
+mkdir -p ${MODULE_TMP_PATH}
 
 # 项目的临时文件目录
 MODULE_TMP_PATH=${MODULE_BATH_PATH}/tmp
