@@ -45,7 +45,7 @@ else
   UPDATE=true
 fi
 
-if [ $RESTART == true ]; then
+if [ $UPDATE == true ]; then
   # 构建镜像
   docker build -t registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/ehang-sping-boot-hello-world:latest .
   # 将镜像推送到埃利园
