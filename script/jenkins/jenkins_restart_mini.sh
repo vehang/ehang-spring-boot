@@ -76,14 +76,16 @@ jar_unzip_check_md5() {
     return 1
   fi
 
+  # 根据上一次生成的MD5校验
   md5sum --status -c $UNZIP_JAR_FILE_LIST_MD5
   RE=$?
+  # 生成最新的文件列表的MD5
   md5sum $UNZIP_JAR_FILE_LIST > $UNZIP_JAR_FILE_LIST_MD5
   # 返回校验结果
   return $RE
 }
 
-chenk_md5() {
+check_md5() {
   # jar 包的路径
   JAR_FILE=$1
   if [ -f $JAR_FILE ]; then
@@ -139,7 +141,7 @@ then
     do
       if [ -f $LIB_JAR_FILE ];then
         echo "Server校验 校验依赖Jar："$LIB_JAR_FILE
-        chenk_md5 $LIB_JAR_FILE
+        check_md5 $LIB_JAR_FILE
         if [ $? = 0 ];then
           echo "Server校验 依赖lib校验！成功，没有发生变化："$LIB_JAR_FILE
         else
@@ -156,7 +158,7 @@ then
 
   MODULE_JAR=${MODULE_TMP_PATH}/${JAR_NAME}.jar
   echo "Server校验 项目Jar："$MODULE_JAR
-  chenk_md5 $MODULE_JAR
+  check_md5 $MODULE_JAR
   if [ $? = 0 ];then
      echo "Server校验 校验成功，没有发生变化"
   else

@@ -90,7 +90,7 @@ jar_unzip_check_md5() {
   return $RE
 }
 
-chenk_md5() {
+check_md5() {
   # jar 包的路径
   JAR_FILE=$1
   if [ -f $JAR_FILE ]; then
@@ -157,7 +157,7 @@ then
       echo $LIB_JAR_FILE
       if [ -f $LIB_JAR_FILE ];then
         echo "jenkins校验依赖Jar："$LIB_JAR_FILE
-        chenk_md5 $LIB_JAR_FILE
+        check_md5 $LIB_JAR_FILE
         if [ $? = 0 ];then
           echo "jenkins依赖lib校验！成功，没有发生变化"$LIB_JAR_FILE
         else
@@ -169,7 +169,7 @@ then
 
   MODULE_JAR=${MODULE_TMP_PATH}/${JAR_NAME}.jar
   echo "jenkins校验项目Jar："$MODULE_JAR
-  chenk_md5 $MODULE_JAR
+  check_md5 $MODULE_JAR
   if [ $? = 0 ];then
      echo "jenkins校验成功，没有发生变化"
   else
