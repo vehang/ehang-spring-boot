@@ -21,18 +21,23 @@
     </properties>
 
     <modules>
+<!--        <module>spring-boot-001-hello-world</module>
+        <module>spring-boot-002-banner</module>
+        <module>spring-boot-003-http-request</module>
+        <module>spring-boot-004-request-validate</module>
+        <module>spring-boot-005-common</module>
+        <module>spring-boot-005-responce-exception</module>
+        <module>spring-boot-006-config</module>
+        <module>spring-boot-007-profile</module>
+        <module>spring-boot-008-mysql-jpa</module>
+        <module>spring-boot-009-mysql-mybatis</module>
+        <module>spring-boot-010-mysql-mybatis-plus</module>
+        <module>spring-boot-011-redis</module>
+        <module>spring-boot-012-tools-jenkins-mini-build</module>-->
+
         <module>spring-boot-001-hello-world</module>
-               <module>spring-boot-002-banner</module>
-        <!--         <module>spring-boot-003-http-request</module>
-                <module>spring-boot-004-request-validate</module>
-                <module>spring-boot-005-common</module>
-                <module>spring-boot-005-responce-exception</module>
-                <module>spring-boot-006-config</module>
-                <module>spring-boot-007-profile</module>
-                <module>spring-boot-008-mysql-jpa</module>
-                <module>spring-boot-009-mysql-mybatis</module>
-                <module>spring-boot-010-mysql-mybatis-plus</module>
-                <module>spring-boot-011-redis</module>-->
+        <module>spring-boot-002-banner</module>
+        <module>spring-boot-012-tools-jenkins-mini-build</module>
     </modules>
 
     <dependencies>

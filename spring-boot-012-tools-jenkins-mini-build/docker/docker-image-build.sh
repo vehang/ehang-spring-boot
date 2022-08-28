@@ -1,16 +1,11 @@
-#!/bin/sh
+# 该脚本是用于拆分业务jar和lib的检测，打包，部署
 
-# JDK的环境变量
-export JAVA_HOME=/usr/local/jdk-11.0.14
-export PATH=$JAVA_HOME/bin:$PATH
-
-# 基础路径，由参数传入
-# 多模块的时候，需要在路径中使用*统配一下多模块
-# 比如/opt/ehang-spring-boot是多模块，下面由module1和module2
-# 那么执行shell的时候使用：sh restart.sh /opt/ehang-spring-boot/\*  注意这里的*需要转义一下
-JAR_BATH=$1
-echo "基础路径:"$JAR_BATH
-JAR_PATH=${JAR_BATH}/target/*.jar
+# 基础的lib镜像
+MODULE_DOCKER_LIB_IMAGE_NAME=lib-jenjins-mini-build
+# app的镜像名称
+MODULE_DOCKER_IMAGE_NAME=ehang-sping-boot-jenkins-mini-build
+# 基础路径
+MODULE_BATH_PATH=./spring-boot-012-tools-jenkins-mini-build
 
 # jar_check_md5 通过jar的md5值直接检测
 # jar_unzip_check_md5 通过对jar包解压 校验文件详情的MD5
@@ -110,51 +105,55 @@ check_md5() {
       echo "Jenkins Docker镜像构建校验 通过解压的MD5校验失败"
     fi
   fi
+
   return 1
 }
 
-# 获取所有的JAR 开始遍历
-for JAR_FILE in $JAR_PATH
+MODULE_LIB_PATH=${MODULE_BATH_PATH}/docker/lib
+MODULE_APP_PATH=${MODULE_BATH_PATH}/docker/app
+
+\cp -r ${MODULE_BATH_PATH}/target/*.jar ${MODULE_APP_PATH}
+\cp -r ${MODULE_BATH_PATH}/target/lib/*.jar ${MODULE_LIB_PATH}
+
+LIB_UPDATE=false
+for LIB_JAR_FILE in ${MODULE_LIB_PATH}/*.jar
 do
-if [ -f $JAR_FILE ]
-then
-  echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-  echo "JAR路径:"$JAR_FILE
-
-  APP_UPDATE=false
-  check_md5 $JAR_FILE
-  if [ $? = 0 ];then
-    echo "Jenkins Docker镜像构建校验lib！成功，没有发生变化"$JAR_FILE
-  else
-    APP_UPDATE=true
-    echo "Jenkins Docker镜像构建校验lib！失败，已经更新"$JAR_FILE
+  echo $LIB_JAR_FILE
+  if [ -f $LIB_JAR_FILE ];then
+    echo "Jenkins Docker镜像构建校验lib 依赖Jar："$LIB_JAR_FILE
+    check_md5 $LIB_JAR_FILE
+    if [ $? = 0 ];then
+      echo "Jenkins Docker镜像构建校验lib！成功，没有发生变化"$LIB_JAR_FILE
+    else
+      LIB_UPDATE=true
+      echo "Jenkins Docker镜像构建校验lib！失败，已经更新"$LIB_JAR_FILE
+    fi
   fi
-
-  # 获取进程号 判断当前服务是否启动；如果Jar没变，但是服务未启动，也需要执行启动脚本
-  PROCESS_ID=`ps -ef | grep $JAR_FILE | grep -v grep | awk '{print $2}'`
-  # 如果不需要重启，但是进程号没有，说明当前jar没有启动，同样也需要启动一下
-  if [ $APP_UPDATE == false ] && [ ${#PROCESS_ID} == 0 ] ;then
-     echo "没有发现进程，说明服务未启动,需要启动服务"
-     APP_UPDATE=true
-  fi
-
-  # 如果是需要启动
-  if [ $APP_UPDATE == true ]; then
-      # kill掉原有的进程
-      ps -ef | grep $JAR_FILE | grep -v grep | awk '{print $2}' | xargs kill -9
-
-      #如果出现Jenins Job执行完之后，进程被jenkins杀死，可尝试放开此配置项
-      #BUILD_ID=dontKillMe
-      #启动Jar
-      nohup java -jar $JAR_FILE > ${JAR_FILE}.log 2>&1 &
-      # =0 启动成功 =1 启动失败
-      if [ $? == 0 ];then
-          echo "restart success!!! process id:" `ps -ef | grep $JAR_FILE | grep -v grep | awk '{print $2}'`
-      else
-          echo "启动失败！"
-      fi
-  fi
-  echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-  echo ""
-fi
 done
+# 一旦发现lib有变化，就构建新的lib镜像
+if [ $LIB_UPDATE = true ]; then
+  docker build -t ${MODULE_DOCKER_LIB_IMAGE_NAME}:latest ${MODULE_LIB_PATH}/.
+fi
+
+APP_UPDATE=false
+for APP_JAR_FILE in ${MODULE_APP_PATH}/*.jar
+do
+  echo $APP_JAR_FILE
+  if [ -f $APP_JAR_FILE ];then
+    echo "Jenkins Docker镜像构建校验APP 依赖Jar："$APP_JAR_FILE
+    check_md5 $APP_JAR_FILE
+    if [ $? = 0 ];then
+      echo "Jenkins Docker镜像构建校验APP！成功，没有发生变化"$APP_JAR_FILE
+    else
+      APP_UPDATE=true
+      echo "Jenkins Docker镜像构建校验APP！失败，已经更新"$APP_JAR_FILE
+    fi
+  fi
+done
+# 一旦发现lib有变化，或者APP发生变化 都需要构建新的镜像
+if [ $APP_UPDATE = true ] || [ $LIB_UPDATE = true ]; then
+  # 构建镜像
+  docker build -t registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/${MODULE_DOCKER_IMAGE_NAME}:latest ${MODULE_APP_PATH}/.
+  # 将镜像推送到阿里云
+  docker push registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/${MODULE_DOCKER_IMAGE_NAME}:latest
+fi
