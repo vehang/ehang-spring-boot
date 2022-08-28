@@ -111,20 +111,20 @@ then
 
   # 在模块下创建一个临时的目录
   MODULE_TMP_PATH=${MODULE_PATH}/tmp
-  sudo mkdir -p $MODULE_TMP_PATH
+  mkdir -p $MODULE_TMP_PATH
 
   # 在模块下临时目录下创建一个
   MODULE_TMP_LIB_PATH=${MODULE_TMP_PATH}/lib
-  sudo mkdir -p $MODULE_TMP_LIB_PATH
+  mkdir -p $MODULE_TMP_LIB_PATH
 
   # 将jar包拷贝到临时目录
-  sudo \cp -r $JAR_FILE $MODULE_TMP_PATH
+  \cp -r $JAR_FILE $MODULE_TMP_PATH
 
   # lib目录的路径
   MODULE_LIB_PATH=${MODULE_PATH}/target/lib
   if [ -d $MODULE_LIB_PATH ]; then
     # 将打包后的lib下的依赖全部拷贝到临时的lib文件夹下
-    sudo \cp -r ${MODULE_LIB_PATH}/* ${MODULE_TMP_LIB_PATH}
+    \cp -r ${MODULE_LIB_PATH}/* ${MODULE_TMP_LIB_PATH}
     for LIB_JAR_FILE in $MODULE_TMP_LIB_PATH
     do
       if [ -f $LIB_JAR_FILE ];then
