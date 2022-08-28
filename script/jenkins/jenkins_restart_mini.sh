@@ -111,7 +111,7 @@ then
   if [ -d $MODULE_LIB_PATH ]; then
     # 将打包后的lib下的依赖全部拷贝到临时的lib文件夹下
     #\cp -r ${MODULE_LIB_PATH}/* ${MODULE_TMP_LIB_PATH}
-    for LIB_JAR_FILE in $MODULE_TMP_LIB_PATH
+    for LIB_JAR_FILE in ${MODULE_TMP_LIB_PATH}/*.jar
     do
       if [ -f $LIB_JAR_FILE ];then
         echo "校验依赖Jar："$LIB_JAR_FILE

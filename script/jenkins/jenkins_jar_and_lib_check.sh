@@ -27,7 +27,6 @@ jar_check_md5() {
 
   JAR_MD5_FILE=${JAR_FILE}.md5
   if [ -f $LIB_JAR_MD5_FILE ]; then
-
     md5sum --status -c $LIB_JAR_MD5_FILE
     return $?
   fi
@@ -126,8 +125,8 @@ then
   if [ -d $MODULE_LIB_PATH ]; then
     # 将打包后的lib下的依赖全部拷贝到临时的lib文件夹下
     \cp -r ${MODULE_LIB_PATH}/* ${MODULE_TMP_LIB_PATH}
-    `ll ${MODULE_TMP_LIB_PATH}`
-    for LIB_JAR_FILE in $MODULE_TMP_LIB_PATH
+    `ls ${MODULE_TMP_LIB_PATH}`
+    for LIB_JAR_FILE in ${MODULE_TMP_LIB_PATH}/*.jar
     do
       echo $LIB_JAR_FILE
       if [ -f $LIB_JAR_FILE ];then
