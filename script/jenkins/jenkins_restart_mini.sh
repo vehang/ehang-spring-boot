@@ -178,7 +178,7 @@ then
       #如果出现Jenins Job执行完之后，进程被jenkins杀死，可尝试放开此配置项
       #BUILD_ID=dontKillMe
       #启动Jar
-      if [ -d $MODULE_LIB_PATH ]; then
+      if [ -d $MODULE_TMP_LIB_PATH ]; then
         echo "Server校验 loader.path指定lib的方式启动..."
         nohup java -Dloader.path=${MODULE_TMP_LIB_PATH} -jar $JAR_FILE > ${JAR_FILE}.log 2>&1 &
       else
