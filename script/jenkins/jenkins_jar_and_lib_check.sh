@@ -129,45 +129,23 @@ then
     do
       if [ -f $LIB_JAR_FILE ];then
         echo "校验依赖Jar："$LIB_JAR_FILE
-#        chenk_md5 $LIB_JAR_FILE
-#        if [ $? = 0 ];then
-#          echo "校验成功，没有发生变化"
-#        else
-#          echo "校验失败，已经更新"
-#        fi
-
-        # 直接通过jar校验
-        jar_chenk_md5 $LIB_JAR_FILE
+        chenk_md5 $LIB_JAR_FILE
         if [ $? = 0 ];then
-          rm -f $LIB_JAR_FILE
-          echo "依赖lib校验成功，没有发生变化"
-          #return 0
-        fi
-
-        # 通过解压jar 校验是否更新
-        jar_unzip_check_md5 $LIB_JAR_FILE
-        if [ $? = 0 ];then
-          rm -f $LIB_JAR_FILE
-          echo "依赖lib校验成功，没有发生变化"
-          #return 0
+          echo "校验成功，没有发生变化"
+        else
+          echo "校验失败，已经更新"
         fi
 
       fi
     done
   fi
 
-  # 直接通过jar校验
-  jar_chenk_md5 $JAR_FILE
+  echo "校验项目Jar："$JAR_FILE
+  chenk_md5 $JAR_FILE
   if [ $? = 0 ];then
-    rm -f $JAR_FILE
-    echo "jar校验成功，没有发生变化"
-  fi
-
-  # 通过解压jar 校验是否更新
-  jar_unzip_check_md5 $JAR_FILE
-  if [ $? = 0 ];then
-    rm -f $JAR_FILE
-    echo "jar校验成功，没有发生变化"
+     echo "校验成功，没有发生变化"
+  else
+     echo "校验失败，已经更新"
   fi
 fi
 done
