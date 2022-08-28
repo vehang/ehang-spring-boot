@@ -26,8 +26,8 @@ jar_check_md5() {
   fi
 
   JAR_MD5_FILE=${JAR_FILE}.md5
-  if [ -f $LIB_JAR_MD5_FILE ]; then
-    md5sum --status -c $LIB_JAR_MD5_FILE
+  if [ -f $JAR_MD5_FILE ]; then
+    md5sum --status -c $JAR_MD5_FILE
     return $?
   fi
 
