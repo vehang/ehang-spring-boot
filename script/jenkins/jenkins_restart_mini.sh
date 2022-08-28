@@ -19,12 +19,14 @@ jar_check_md5() {
   JAR_FILE=$1
   if [ ! -f $JAR_FILE ]; then
     # 如果校验的jar不存在 返回失败
+    md5sum $JAR_FILE > $JAR_MD5_FILE
     return 1
   fi
 
   JAR_MD5_FILE=${JAR_FILE}.md5
   if [ -f $JAR_MD5_FILE ]; then
     md5sum --status -c $JAR_MD5_FILE
+    md5sum $JAR_FILE > $JAR_MD5_FILE
     return $?
   fi
 
@@ -51,17 +53,20 @@ jar_unzip_check_md5() {
   UNZIP_JAR_FILE_LIST=${UNZIP_JAR_FILE_BASE_PATH}/${UNZIP_JAR_FILE_NAME}.files
   # 缓存解压后文件详情的MD5
   UNZIP_JAR_FILE_LIST_MD5=${UNZIP_JAR_FILE_BASE_PATH}/${UNZIP_JAR_FILE_NAME}.files.md5
-  if [ ! -f $UNZIP_JAR_FILE_LIST_MD5 ]; then
-    # 如果校验文件不存在 直接返回校验失败
-    return 1
-  fi
 
   # 解压文件到临时目录
   unzip $UNZIP_JAR_FILE -d $JAR_FILE_UNZIP_PATH
   # 遍历解压目录，计算每个文件的MD5值及路径 输出到详情列表文件中
   find $JAR_FILE_UNZIP_PATH -type f -print | xargs md5sum > $UNZIP_JAR_FILE_LIST
 
+  if [ ! -f $UNZIP_JAR_FILE_LIST_MD5 ]; then
+    # 如果校验文件不存在 直接返回校验失败
+    md5sum $UNZIP_JAR_FILE_LIST > $UNZIP_JAR_FILE_LIST_MD5
+    return 1
+  fi
+
   md5sum --status -c $UNZIP_JAR_FILE_LIST_MD5
+  md5sum $UNZIP_JAR_FILE_LIST > $UNZIP_JAR_FILE_LIST_MD5
   # 返回校验结果
   return $?
 }
