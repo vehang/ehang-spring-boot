@@ -31,8 +31,9 @@ jar_check_md5() {
     cat $JAR_MD5_FILE
     md5sum $JAR_FILE
     md5sum --status -c $JAR_MD5_FILE
+    RE=$?
     md5sum $JAR_FILE > $JAR_MD5_FILE
-    return $?
+    return $RE
   else
     md5sum $JAR_FILE > $JAR_MD5_FILE
   fi
@@ -83,9 +84,10 @@ jar_unzip_check_md5() {
   cat $UNZIP_JAR_FILE_LIST_MD5
   md5sum $UNZIP_JAR_FILE_LIST
   md5sum --status -c $UNZIP_JAR_FILE_LIST_MD5
+  RE=$?
   md5sum $UNZIP_JAR_FILE_LIST > $UNZIP_JAR_FILE_LIST_MD5
   # 返回校验结果
-  return $?
+  return $RE
 }
 
 chenk_md5() {
