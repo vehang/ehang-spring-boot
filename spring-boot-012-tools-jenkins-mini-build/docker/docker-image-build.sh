@@ -1,4 +1,15 @@
-# 考虑到多模块的情况 这里创建一个临时目录，来汇总配置
+# 该脚本是用于拆分业务jar和lib的检测，打包，部署
+
+# 基础的lib镜像
+MODULE_DOCKER_LIB_IMAGE_NAME=lib-jenjins-mini-build
+# app的镜像名称
+MODULE_DOCKER_IMAGE_NAME=ehang-sping-boot-jenkins-mini-build
+# 基础路径
+MODULE_BATH_PATH=./spring-boot-012-tools-jenkins-mini-build
+
+# jar_check_md5 通过jar的md5值直接检测
+# jar_unzip_check_md5 通过对jar包解压 校验文件详情的MD5
+# check_md5 汇总上面两个方法的校验
 
 # 直接通过jar校验
 jar_check_md5() {
@@ -97,13 +108,6 @@ check_md5() {
 
   return 1
 }
-
-# 基础的lib镜像
-MODULE_DOCKER_LIB_IMAGE_NAME=lib-jenjins-mini-build
-# app的镜像名称
-MODULE_DOCKER_IMAGE_NAME=ehang-sping-boot-jenkins-mini-build
-# 基础路径
-MODULE_BATH_PATH=./spring-boot-012-tools-jenkins-mini-build
 
 MODULE_LIB_PATH=${MODULE_BATH_PATH}/docker/lib
 MODULE_APP_PATH=${MODULE_BATH_PATH}/docker/app

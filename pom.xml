@@ -32,7 +32,11 @@
         <module>spring-boot-008-mysql-jpa</module>
         <module>spring-boot-009-mysql-mybatis</module>
         <module>spring-boot-010-mysql-mybatis-plus</module>
-        <module>spring-boot-011-redis</module>-->
+        <module>spring-boot-011-redis</module>
+        <module>spring-boot-012-tools-jenkins-mini-build</module>-->
+
+        <module>spring-boot-001-hello-world</module>
+        <module>spring-boot-002-banner</module>
         <module>spring-boot-012-tools-jenkins-mini-build</module>
     </modules>
 
