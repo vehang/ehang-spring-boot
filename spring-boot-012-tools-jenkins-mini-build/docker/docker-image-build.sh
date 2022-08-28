@@ -154,6 +154,6 @@ done
 if [ $APP_UPDATE = true ] || [ $LIB_UPDATE = true ]; then
   # 构建镜像
   docker build -t registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/${MODULE_DOCKER_IMAGE_NAME}:latest ${MODULE_APP_PATH}/.
-  # 将镜像推送到埃利园
+  # 将镜像推送到阿里云
   docker push registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/${MODULE_DOCKER_IMAGE_NAME}:latest
 fi
