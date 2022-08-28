@@ -173,21 +173,23 @@ then
   # 如果是需要启动
   if [ $UPDATE == true ]; then
       # kill掉原有的进程
-      ps -ef | grep $JAR_FILE | grep -v grep | awk '{print $2}' | xargs kill -9
+      ps -ef | grep $MODULE_JAR | grep -v grep | awk '{print $2}' | xargs kill -9
 
       #如果出现Jenins Job执行完之后，进程被jenkins杀死，可尝试放开此配置项
       #BUILD_ID=dontKillMe
       #启动Jar
+
       if [ -d $MODULE_TMP_LIB_PATH ]; then
         echo "Server校验 loader.path指定lib的方式启动..."
-        nohup java -Dloader.path=${MODULE_TMP_LIB_PATH} -jar $JAR_FILE > ${JAR_FILE}.log 2>&1 &
+        echo "lib路径："${MODULE_TMP_LIB_PATH}
+        nohup java -Dloader.path=${MODULE_TMP_LIB_PATH} -jar $MODULE_JAR > ${MODULE_JAR}.log 2>&1 &
       else
         echo "Server校验 普通的方式启动..."
-        nohup java -jar $JAR_FILE > ${JAR_FILE}.log 2>&1 &
+        nohup java -jar $MODULE_JAR > ${MODULE_JAR}.log 2>&1 &
       fi
       # =0 启动成功 =1 启动失败
       if [ $? == 0 ];then
-          echo "Server校验 restart success!!! process id:" `ps -ef | grep $JAR_FILE | grep -v grep | awk '{print $2}'`
+          echo "Server校验 restart success!!! process id:" `ps -ef | grep $MODULE_JAR | grep -v grep | awk '{print $2}'`
       else
           echo "Server校验 启动失败！"
       fi
