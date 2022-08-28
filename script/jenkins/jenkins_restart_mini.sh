@@ -54,10 +54,13 @@ jar_unzip_check_md5() {
   # 缓存解压后文件详情的MD5
   UNZIP_JAR_FILE_LIST_MD5=${UNZIP_JAR_FILE_BASE_PATH}/${UNZIP_JAR_FILE_NAME}.files.md5
 
+  rm -rf $JAR_FILE_UNZIP_PATH
+  mkdir -p $JAR_FILE_UNZIP_PATH
   # 解压文件到临时目录
   unzip $UNZIP_JAR_FILE -d $JAR_FILE_UNZIP_PATH
   # 遍历解压目录，计算每个文件的MD5值及路径 输出到详情列表文件中
   find $JAR_FILE_UNZIP_PATH -type f -print | xargs md5sum > $UNZIP_JAR_FILE_LIST
+  rm -rf $JAR_FILE_UNZIP_PATH
 
   if [ ! -f $UNZIP_JAR_FILE_LIST_MD5 ]; then
     # 如果校验文件不存在 直接返回校验失败
