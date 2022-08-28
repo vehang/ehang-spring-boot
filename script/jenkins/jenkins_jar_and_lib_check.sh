@@ -17,7 +17,7 @@ JAR_PATH=${JAR_BATH}/target/*.jar
 JAR_UNZIP_PATH=/tmp/jar_unzip_tmp
 
 # 直接通过jar校验
-function jar_check_md5() {
+jar_check_md5() {
   # jar 包的路径
   JAR_FILE=$1
   if [ ! -f $JAR_FILE]; then
@@ -36,7 +36,7 @@ function jar_check_md5() {
 }
 
 # 将Jar解压之后校验
-function jar_unzip_check_md5() {
+jar_unzip_check_md5() {
   # jar 包的路径
   UNZIP_JAR_FILE=$1
   if [ ! -f $UNZIP_JAR_FILE]; then
@@ -70,7 +70,7 @@ function jar_unzip_check_md5() {
   return $?
 }
 
-function chenk_md5() {
+chenk_md5() {
   # jar 包的路径
   JAR_FILE=$1
   if [ -f $JAR_FILE]; then
@@ -127,7 +127,7 @@ then
     \cp -r ${MODULE_LIB_PATH}/* ${MODULE_TMP_LIB_PATH}
     for LIB_JAR_FILE in $MODULE_TMP_LIB_PATH
     do
-      if [ -f $LIB_JAR_FILE ]
+      if [ -f $LIB_JAR_FILE ];then
         echo "校验依赖Jar："$LIB_JAR_FILE
         chenk_md5 $LIB_JAR_FILE
         if [ $? = 0 ];then
