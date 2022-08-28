@@ -28,6 +28,8 @@ jar_check_md5() {
   JAR_MD5_FILE=${JAR_FILE}.md5
   echo "jenkins校验 JAR的MD5文件："$JAR_MD5_FILE
   if [ -f $JAR_MD5_FILE ]; then
+    cat $JAR_MD5_FILE
+    md5sum $JAR_FILE
     md5sum --status -c $JAR_MD5_FILE
     md5sum $JAR_FILE > $JAR_MD5_FILE
     return $?
@@ -78,6 +80,8 @@ jar_unzip_check_md5() {
     return 1
   fi
 
+  cat $UNZIP_JAR_FILE_LIST_MD5
+  md5sum $UNZIP_JAR_FILE_LIST
   md5sum --status -c $UNZIP_JAR_FILE_LIST_MD5
   md5sum $UNZIP_JAR_FILE_LIST > $UNZIP_JAR_FILE_LIST_MD5
   # 返回校验结果
