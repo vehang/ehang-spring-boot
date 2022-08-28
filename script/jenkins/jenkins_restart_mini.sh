@@ -10,7 +10,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 # 比如/opt/ehang-spring-boot是多模块，下面由module1和module2
 # 那么执行shell的时候使用：sh restart.sh /opt/ehang-spring-boot/\*  注意这里的*需要转义一下
 JAR_BATH=$1
-echo "基础路径:"$JAR_BATH
+echo "Server校验 基础路径:"$JAR_BATH
 JAR_PATH=${JAR_BATH}/tmp/*.jar
 
 # 直接通过jar校验
@@ -19,7 +19,6 @@ jar_check_md5() {
   JAR_FILE=$1
   if [ ! -f $JAR_FILE ]; then
     # 如果校验的jar不存在 返回失败
-    md5sum $JAR_FILE > $JAR_MD5_FILE
     return 1
   fi
 
@@ -28,6 +27,8 @@ jar_check_md5() {
     md5sum --status -c $JAR_MD5_FILE
     md5sum $JAR_FILE > $JAR_MD5_FILE
     return $?
+  else
+    md5sum $JAR_FILE > $JAR_MD5_FILE
   fi
 
   return 1
@@ -44,13 +45,13 @@ jar_unzip_check_md5() {
 
   # jar的名称
   UNZIP_JAR_FILE_NAME=`basename -s .jar $UNZIP_JAR_FILE`
-  echo "JAR包名称："$UNZIP_JAR_FILE_NAME
+  echo "Server校验 JAR包名称："$UNZIP_JAR_FILE_NAME
   # jar所在的路径
   UNZIP_JAR_FILE_BASE_PATH=${UNZIP_JAR_FILE%/${UNZIP_JAR_FILE_NAME}*}
-  echo "JAR包路径："$UNZIP_JAR_FILE_BASE_PATH
+  echo "Server校验 JAR包路径："$UNZIP_JAR_FILE_BASE_PATH
   # 解压的临时目录
   JAR_FILE_UNZIP_PATH=${UNZIP_JAR_FILE_BASE_PATH}/jar_unzip_tmp
-  echo "解压路径："$JAR_FILE_UNZIP_PATH
+  echo "Server校验 解压路径："$JAR_FILE_UNZIP_PATH
 
   # 用于缓存解压后文件详情的目录
   UNZIP_JAR_FILE_LIST=${UNZIP_JAR_FILE_BASE_PATH}/${UNZIP_JAR_FILE_NAME}.files
@@ -106,7 +107,7 @@ do
 if [ -f $JAR_FILE ]
 then
   echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-  echo "JAR路径:"$JAR_FILE
+  echo "Server校验 JAR路径:"$JAR_FILE
 
   # 获取模块的基础路径，也就是target之前的路径
   MODULE_PATH=${JAR_FILE%/tmp/*}
@@ -129,12 +130,12 @@ then
     for LIB_JAR_FILE in ${MODULE_TMP_LIB_PATH}/*.jar
     do
       if [ -f $LIB_JAR_FILE ];then
-        echo "校验依赖Jar："$LIB_JAR_FILE
+        echo "Server校验 校验依赖Jar："$LIB_JAR_FILE
         chenk_md5 $LIB_JAR_FILE
         if [ $? = 0 ];then
-          echo "依赖lib校验！成功，没有发生变化："$LIB_JAR_FILE
+          echo "Server校验 依赖lib校验！成功，没有发生变化："$LIB_JAR_FILE
         else
-          echo "依赖lib校验！失败，需要重新启动："$LIB_JAR_FILE
+          echo "Server校验 依赖lib校验！失败，需要重新启动："$LIB_JAR_FILE
           UPDATE=true
           # 这里不结束的原因是为了计算所有模块的MD5值 以方便后续的校验
           # break
@@ -142,15 +143,15 @@ then
       fi
     done
   else
-    echo "模块没有lib目录..."
+    echo "Server校验 模块没有lib目录..."
   fi
 
-  echo "校验项目Jar："$JAR_FILE
+  echo "Server校验 校验项目Jar："$JAR_FILE
   chenk_md5 $JAR_FILE
   if [ $? = 0 ];then
-     echo "校验成功，没有发生变化"
+     echo "Server校验 校验成功，没有发生变化"
   else
-     echo "校验失败，发现有jar包已经更新了，需要重新启动"
+     echo "Server校验 校验失败，发现有jar包已经更新了，需要重新启动"
      UPDATE=true
   fi
 
@@ -158,7 +159,7 @@ then
   PROCESS_ID=`ps -ef | grep $JAR_FILE | grep -v grep | awk '{print $2}'`
   # 如果不需要重启，但是进程号没有，说明当前jar没有启动，同样也需要启动一下
   if [ $UPDATE == false ] && [ ${#PROCESS_ID} == 0 ] ;then
-     echo "没有发现进程，说明服务未启动,需要启动服务"
+     echo "Server校验 没有发现进程，说明服务未启动,需要启动服务"
      UPDATE=true
   fi
 
@@ -171,17 +172,17 @@ then
       #BUILD_ID=dontKillMe
       #启动Jar
       if [ -d $MODULE_LIB_PATH ]; then
-        echo "loader.path指定lib的方式启动..."
+        echo "Server校验 loader.path指定lib的方式启动..."
         nohup java -Dloader.path=${MODULE_TMP_LIB_PATH} -jar $JAR_FILE > ${JAR_FILE}.log 2>&1 &
       else
-        echo "普通的方式启动..."
+        echo "Server校验 普通的方式启动..."
         nohup java -jar $JAR_FILE > ${JAR_FILE}.log 2>&1 &
       fi
       # =0 启动成功 =1 启动失败
       if [ $? == 0 ];then
-          echo "restart success!!! process id:" `ps -ef | grep $JAR_FILE | grep -v grep | awk '{print $2}'`
+          echo "Server校验 restart success!!! process id:" `ps -ef | grep $JAR_FILE | grep -v grep | awk '{print $2}'`
       else
-          echo "启动失败！"
+          echo "Server校验 启动失败！"
       fi
 
       # 将最新的MD5值写入到缓存文件

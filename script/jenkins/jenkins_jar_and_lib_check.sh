@@ -10,7 +10,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 # 比如/opt/ehang-spring-boot是多模块，下面由module1和module2
 # 那么执行shell的时候使用：sh restart.sh /opt/ehang-spring-boot/\*  注意这里的*需要转义一下
 JAR_BATH=$1
-echo "基础路径:"$JAR_BATH
+echo "jenkins校验 基础路径:"$JAR_BATH
 JAR_PATH=${JAR_BATH}/target/*.jar
 
 # 临时的解压目录
@@ -48,13 +48,13 @@ jar_unzip_check_md5() {
 
   # jar的名称
   UNZIP_JAR_FILE_NAME=`basename -s .jar $UNZIP_JAR_FILE`
-  echo "JAR包名称："$UNZIP_JAR_FILE_NAME
+  echo "jenkins校验 JAR包名称："$UNZIP_JAR_FILE_NAME
   # jar所在的路径
   UNZIP_JAR_FILE_BASE_PATH=${UNZIP_JAR_FILE%/${UNZIP_JAR_FILE_NAME}*}
-  echo "JAR包路径："$UNZIP_JAR_FILE_BASE_PATH
+  echo "jenkins校验 JAR包路径："$UNZIP_JAR_FILE_BASE_PATH
   # 解压的临时目录
   JAR_FILE_UNZIP_PATH=${UNZIP_JAR_FILE_BASE_PATH}/jar_unzip_tmp
-  echo "解压路径："$JAR_FILE_UNZIP_PATH
+  echo "jenkins校验 解压路径："$JAR_FILE_UNZIP_PATH
 
   # 用于缓存解压后文件详情的目录
   UNZIP_JAR_FILE_LIST=${UNZIP_JAR_FILE_BASE_PATH}/${UNZIP_JAR_FILE_NAME}.files
@@ -110,7 +110,7 @@ do
 if [ -f $JAR_FILE ]
 then
   echo ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-  echo "JAR路径:"$JAR_FILE
+  echo "jenkins校验 业务JAR路径:"$JAR_FILE
   #JAR_FILE_MD5=${JAR_FILE}.md5
 
   # 获取模块的基础路径，也就是target之前的路径
@@ -133,7 +133,7 @@ then
 
   # lib目录的路径
   MODULE_LIB_PATH=${MODULE_PATH}/target/lib
-  echo "lib目录："$MODULE_LIB_PATH
+  echo "jenkins校验 lib目录："$MODULE_LIB_PATH
   if [ -d $MODULE_LIB_PATH ]; then
     # 将打包后的lib下的依赖全部拷贝到临时的lib文件夹下
     \cp -r ${MODULE_LIB_PATH}/* ${MODULE_TMP_LIB_PATH}
@@ -141,23 +141,23 @@ then
     do
       echo $LIB_JAR_FILE
       if [ -f $LIB_JAR_FILE ];then
-        echo "校验依赖Jar："$LIB_JAR_FILE
+        echo "jenkins校验依赖Jar："$LIB_JAR_FILE
         chenk_md5 $LIB_JAR_FILE
         if [ $? = 0 ];then
-          echo "依赖lib校验！成功，没有发生变化"$LIB_JAR_FILE
+          echo "jenkins依赖lib校验！成功，没有发生变化"$LIB_JAR_FILE
         else
-          echo "依赖lib校验！失败，已经更新"$LIB_JAR_FILE
+          echo "jenkins依赖lib校验！失败，已经更新"$LIB_JAR_FILE
         fi
       fi
     done
   fi
 
-  echo "校验项目Jar："$JAR_FILE
+  echo "jenkins校验项目Jar："$JAR_FILE
   chenk_md5 $JAR_FILE
   if [ $? = 0 ];then
-     echo "校验成功，没有发生变化"
+     echo "jenkins校验成功，没有发生变化"
   else
-     echo "校验失败，已经更新"
+     echo "jenkins校验失败，已经更新"
   fi
 fi
 done
