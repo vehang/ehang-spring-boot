@@ -59,11 +59,11 @@ jar_unzip_check_md5() {
 
   # 用于缓存解压后文件详情的目录
   UNZIP_JAR_FILE_LIST=${UNZIP_JAR_FILE_BASE_PATH}/${UNZIP_JAR_FILE_NAME}.files
-  echo "Server校验 jar文件详情路径："$UNZIP_JAR_FILE_LIST
+  echo "jenkins校验 jar文件详情路径："$UNZIP_JAR_FILE_LIST
   # 缓存解压后文件详情的MD5
   UNZIP_JAR_FILE_LIST_MD5=${UNZIP_JAR_FILE_BASE_PATH}/${UNZIP_JAR_FILE_NAME}.files.md5
-  echo "Server校验 jar文件详情MD5校验路径："$UNZIP_JAR_FILE_LIST
-  
+  echo "jenkins校验 jar文件详情MD5校验路径："$UNZIP_JAR_FILE_LIST
+
   rm -rf $JAR_FILE_UNZIP_PATH
   mkdir -p $JAR_FILE_UNZIP_PATH
   # 解压文件到临时目录
@@ -163,7 +163,7 @@ then
 
   MODULE_JAR=${MODULE_TMP_PATH}/${JAR_NAME}.jar
   echo "jenkins校验项目Jar："$MODULE_JAR
-  chenk_md5 $JAR_FILE
+  chenk_md5 $MODULE_JAR
   if [ $? = 0 ];then
      echo "jenkins校验成功，没有发生变化"
   else

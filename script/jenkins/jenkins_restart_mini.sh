@@ -88,19 +88,19 @@ chenk_md5() {
     # 直接通过jar校验
     jar_check_md5 $JAR_FILE
     if [ $? = 0 ];then
-      echo "jenkins校验 通过Jar的MD5校验成功"
+      echo "Server校验 通过Jar的MD5校验成功"
       return 0
     else
-      echo "jenkins校验 通过Jar的MD5校验失败"
+      echo "Server校验 通过Jar的MD5校验失败"
     fi
 
     # 通过解压jar 校验是否更新
     jar_unzip_check_md5 $JAR_FILE
     if [ $? = 0 ];then
-      echo "jenkins校验 通过解压的MD5校验成功"
+      echo "Server校验 通过解压的MD5校验成功"
       return 0
     else
-      echo "jenkins校验 通过解压的MD5校验失败"
+      echo "Server校验 通过解压的MD5校验失败"
     fi
   fi
 
@@ -153,8 +153,8 @@ then
   fi
 
   MODULE_JAR=${MODULE_TMP_PATH}/${JAR_NAME}.jar
-  echo "jenkins校验项目Jar："$MODULE_JAR
-  chenk_md5 $JAR_FILE
+  echo "Server校验 项目Jar："$MODULE_JAR
+  chenk_md5 $MODULE_JAR
   if [ $? = 0 ];then
      echo "Server校验 校验成功，没有发生变化"
   else
