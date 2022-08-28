@@ -107,7 +107,7 @@ then
 
   UPDATE=false
   # lib目录的路径
-  MODULE_LIB_PATH=${MODULE_PATH}/lib
+  MODULE_LIB_PATH=${MODULE_PATH}/target/lib
   if [ -d $MODULE_LIB_PATH ]; then
     # 将打包后的lib下的依赖全部拷贝到临时的lib文件夹下
     #\cp -r ${MODULE_LIB_PATH}/* ${MODULE_TMP_LIB_PATH}
@@ -125,6 +125,8 @@ then
         fi
       fi
     done
+  else
+    echo "模块没有lib目录..."
   fi
 
   echo "校验项目Jar："$JAR_FILE

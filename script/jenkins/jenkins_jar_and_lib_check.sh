@@ -121,7 +121,7 @@ then
   \cp -r $JAR_FILE $MODULE_TMP_PATH
 
   # lib目录的路径
-  MODULE_LIB_PATH=${MODULE_PATH}/lib
+  MODULE_LIB_PATH=${MODULE_PATH}/target/lib
   if [ -d $MODULE_LIB_PATH ]; then
     # 将打包后的lib下的依赖全部拷贝到临时的lib文件夹下
     \cp -r ${MODULE_LIB_PATH}/* ${MODULE_TMP_LIB_PATH}
