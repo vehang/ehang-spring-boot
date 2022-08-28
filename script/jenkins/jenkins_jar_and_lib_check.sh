@@ -76,14 +76,14 @@ chenk_md5() {
     # 直接通过jar校验
     jar_check_md5 $JAR_FILE
     if [ $? = 0 ];then
-      rm -f $LIB_JAR_FILE
+      rm -f $JAR_FILE
       return 0
     fi
 
     # 通过解压jar 校验是否更新
     jar_unzip_check_md5 $JAR_FILE
     if [ $? = 0 ];then
-      rm -f $LIB_JAR_FILE
+      rm -f $JAR_FILE
       return 0
     fi
   fi
@@ -125,7 +125,6 @@ then
   if [ -d $MODULE_LIB_PATH ]; then
     # 将打包后的lib下的依赖全部拷贝到临时的lib文件夹下
     \cp -r ${MODULE_LIB_PATH}/* ${MODULE_TMP_LIB_PATH}
-    `ls ${MODULE_TMP_LIB_PATH}`
     for LIB_JAR_FILE in ${MODULE_TMP_LIB_PATH}/*.jar
     do
       echo $LIB_JAR_FILE

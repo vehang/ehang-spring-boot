@@ -73,14 +73,14 @@ chenk_md5() {
     # 直接通过jar校验
     jar_check_md5 $JAR_FILE
     if [ $? = 0 ];then
-      #rm -f $LIB_JAR_FILE
+      rm -f JAR_FILE
       return 0
     fi
 
     # 通过解压jar 校验是否更新
     jar_unzip_check_md5 $JAR_FILE
     if [ $? = 0 ];then
-      #rm -f $LIB_JAR_FILE
+      rm -f JAR_FILE
       return 0
     fi
   fi
@@ -103,6 +103,12 @@ then
   JAR_NAME=`basename -s .jar $JAR_FILE`
   # 得到模块的名称
   MODULE_NAME=`basename $MODULE_PATH`
+
+  # 在模块下创建一个临时的目录
+  MODULE_TMP_PATH=${MODULE_PATH}/tmp
+
+  # 在模块下临时目录下创建一个
+  MODULE_TMP_LIB_PATH=${MODULE_TMP_PATH}/lib
 
   UPDATE=false
   # lib目录的路径
