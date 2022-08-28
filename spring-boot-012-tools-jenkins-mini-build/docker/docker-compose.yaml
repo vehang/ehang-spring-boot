@@ -1,0 +1,12 @@
+version: '2'
+services:
+  ehang-hello-world:
+    container_name: ehang-jenkins-mini-build
+    image: registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/ehang-sping-boot-jenkins-mini-build:latest
+    restart: always
+    volumes:
+      - /opt/ehang:/opt/ehang
+    ports:
+      - "18092:18092"
+    environment:
+      - --spring.profiles.active=dev

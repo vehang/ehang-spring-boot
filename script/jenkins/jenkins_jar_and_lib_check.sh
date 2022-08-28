@@ -1,5 +1,7 @@
 #!/bin/sh
-#最小构建的方式，需要检测lib包
+# Jenkins 构建完之后 检测jar包 依赖jar是否有更新
+# 只把有更新的jar推送到远端服务器
+# 最小构建的方式，需要检测lib包
 
 # JDK的环境变量
 export JAVA_HOME=/usr/local/jdk-11.0.14

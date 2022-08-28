@@ -1,5 +1,6 @@
 #!/bin/sh
-#最小构建的方式，需要检测lib包
+# 业务jar与依赖Jar拆分之后的启动脚本
+# 会综合检测jar和依赖的lib是否都有更新，都有更新的话，重启服务
 
 # JDK的环境变量
 export JAVA_HOME=/usr/local/jdk-11.0.14
