@@ -36,7 +36,7 @@ jar_check_md5() {
 jar_unzip_check_md5() {
   # jar 包的路径
   UNZIP_JAR_FILE=$1
-  if [ ! -f $UNZIP_JAR_FILE]; then
+  if [ ! -f $UNZIP_JAR_FILE ]; then
     # 如果校验的jar不存在 返回失败
     return 1
   fi
@@ -52,7 +52,7 @@ jar_unzip_check_md5() {
   UNZIP_JAR_FILE_LIST=${UNZIP_JAR_FILE_BASE_PATH}/${UNZIP_JAR_FILE_NAME}.files
   # 缓存解压后文件详情的MD5
   UNZIP_JAR_FILE_LIST_MD5=${UNZIP_JAR_FILE_BASE_PATH}/${UNZIP_JAR_FILE_NAME}.files.md5
-  if [ ! -f $UNZIP_JAR_FILE_LIST_MD5]; then
+  if [ ! -f $UNZIP_JAR_FILE_LIST_MD5 ]; then
     # 如果校验文件不存在 直接返回校验失败
     return 1
   fi
@@ -70,9 +70,9 @@ jar_unzip_check_md5() {
 chenk_md5() {
   # jar 包的路径
   JAR_FILE=$1
-  if [ -f $JAR_FILE]; then
+  if [ -f $JAR_FILE ]; then
     # 直接通过jar校验
-    jar_chenk_md5 $JAR_FILE
+    jar_check_md5 $JAR_FILE
     if [ $? = 0 ];then
       #rm -f $LIB_JAR_FILE
       return 0
