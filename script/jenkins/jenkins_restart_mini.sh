@@ -44,10 +44,13 @@ jar_unzip_check_md5() {
 
   # jar的名称
   UNZIP_JAR_FILE_NAME=`basename -s .jar $UNZIP_JAR_FILE`
+  echo "JAR包名称："$UNZIP_JAR_FILE_NAME
   # jar所在的路径
-  UNZIP_JAR_FILE_BASE_PATH=${UNZIP_JAR_FILE_PATH%/${UNZIP_JAR_FILE_NAME}*}
+  UNZIP_JAR_FILE_BASE_PATH=${UNZIP_JAR_FILE%/${UNZIP_JAR_FILE_NAME}*}
+  echo "JAR包路径："$UNZIP_JAR_FILE_BASE_PATH
   # 解压的临时目录
   JAR_FILE_UNZIP_PATH=${UNZIP_JAR_FILE_BASE_PATH}/jar_unzip_tmp
+  echo "解压路径："$JAR_FILE_UNZIP_PATH
 
   # 用于缓存解压后文件详情的目录
   UNZIP_JAR_FILE_LIST=${UNZIP_JAR_FILE_BASE_PATH}/${UNZIP_JAR_FILE_NAME}.files

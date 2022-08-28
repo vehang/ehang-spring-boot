@@ -22,7 +22,6 @@ jar_check_md5() {
   JAR_FILE=$1
   if [ ! -f $JAR_FILE ]; then
     # 如果校验的jar不存在 返回失败
-    md5sum $JAR_FILE > $JAR_MD5_FILE
     return 1
   fi
 
@@ -31,6 +30,8 @@ jar_check_md5() {
     md5sum --status -c $JAR_MD5_FILE
     md5sum $JAR_FILE > $JAR_MD5_FILE
     return $?
+  else
+    md5sum $JAR_FILE > $JAR_MD5_FILE
   fi
 
   return 1
@@ -47,10 +48,13 @@ jar_unzip_check_md5() {
 
   # jar的名称
   UNZIP_JAR_FILE_NAME=`basename -s .jar $UNZIP_JAR_FILE`
+  echo "JAR包名称："$UNZIP_JAR_FILE_NAME
   # jar所在的路径
-  UNZIP_JAR_FILE_BASE_PATH=${UNZIP_JAR_FILE_PATH%/${UNZIP_JAR_FILE_NAME}*}
+  UNZIP_JAR_FILE_BASE_PATH=${UNZIP_JAR_FILE%/${UNZIP_JAR_FILE_NAME}*}
+  echo "JAR包路径："$UNZIP_JAR_FILE_BASE_PATH
   # 解压的临时目录
   JAR_FILE_UNZIP_PATH=${UNZIP_JAR_FILE_BASE_PATH}/jar_unzip_tmp
+  echo "解压路径："$JAR_FILE_UNZIP_PATH
 
   # 用于缓存解压后文件详情的目录
   UNZIP_JAR_FILE_LIST=${UNZIP_JAR_FILE_BASE_PATH}/${UNZIP_JAR_FILE_NAME}.files
