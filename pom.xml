@@ -33,7 +33,6 @@
         <module>spring-boot-009-mysql-mybatis</module>
         <module>spring-boot-010-mysql-mybatis-plus</module>
         <module>spring-boot-011-redis</module>-->
-        <module>spring-boot-005-common</module>
         <module>spring-boot-012-tools-jenkins-mini-build</module>
     </modules>
 
