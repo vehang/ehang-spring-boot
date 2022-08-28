@@ -146,8 +146,8 @@ do
     fi
   fi
 done
-# 一旦发现lib有变化，就构建新的lib镜像
-if [ $APP_UPDATE = true ]; then
+# 一旦发现lib有变化，或者APP发生变化 都需要构建新的镜像
+if [ $APP_UPDATE = true ] || [ $LIB_UPDATE = true ]; then
   # 构建镜像
   docker build -t registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/${MODULE_DOCKER_IMAGE_NAME}:latest ${MODULE_APP_PATH}/.
   # 将镜像推送到埃利园
