@@ -198,9 +198,6 @@ then
       else
           echo "Server校验 启动失败！"
       fi
-
-      # 将最新的MD5值写入到缓存文件
-      # md5sum $JAR_FILES_INFO > $JAR_FILES_INFO_MD5
   fi
   echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
   echo ""
