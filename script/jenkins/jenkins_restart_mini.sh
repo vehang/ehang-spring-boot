@@ -123,18 +123,18 @@ then
   MODULE_LIB_PATH=${MODULE_PATH}/target/lib
   if [ -d $MODULE_TMP_LIB_PATH ]; then
     # 将打包后的lib下的依赖全部拷贝到临时的lib文件夹下
-    #\cp -r ${MODULE_LIB_PATH}/* ${MODULE_TMP_LIB_PATH}
     for LIB_JAR_FILE in ${MODULE_TMP_LIB_PATH}/*.jar
     do
       if [ -f $LIB_JAR_FILE ];then
         echo "校验依赖Jar："$LIB_JAR_FILE
         chenk_md5 $LIB_JAR_FILE
         if [ $? = 0 ];then
-          echo "校验成功，没有发生变化"
+          echo "依赖lib校验！成功，没有发生变化："$LIB_JAR_FILE
         else
-          echo "校验失败，发现有lib包已经更新了，需要重新启动"
+          echo "依赖lib校验！失败，需要重新启动："$LIB_JAR_FILE
           UPDATE=true
-          #break
+          # 这里不结束的原因是为了计算所有模块的MD5值 以方便后续的校验
+          # break
         fi
       fi
     done

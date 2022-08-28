@@ -140,11 +140,10 @@ then
         echo "校验依赖Jar："$LIB_JAR_FILE
         chenk_md5 $LIB_JAR_FILE
         if [ $? = 0 ];then
-          echo "校验成功，没有发生变化"
+          echo "依赖lib校验！成功，没有发生变化"$LIB_JAR_FILE
         else
-          echo "校验失败，已经更新"
+          echo "依赖lib校验！失败，已经更新"$LIB_JAR_FILE
         fi
-
       fi
     done
   fi
