@@ -1,6 +1,6 @@
 version: '2'
 services:
-  ehang-hello-world:
+  ehang-jenkins-mini-build:
     container_name: ehang-jenkins-mini-build
     image: registry.cn-guangzhou.aliyuncs.com/ehang_jenkins/ehang-sping-boot-jenkins-mini-build:latest
     restart: always
