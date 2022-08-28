@@ -20,7 +20,7 @@ JAR_UNZIP_PATH=/tmp/jar_unzip_tmp
 jar_check_md5() {
   # jar 包的路径
   JAR_FILE=$1
-  if [ ! -f $JAR_FILE]; then
+  if [ ! -f $JAR_FILE ]; then
     # 如果校验的jar不存在 返回失败
     return 1
   fi
@@ -122,11 +122,14 @@ then
 
   # lib目录的路径
   MODULE_LIB_PATH=${MODULE_PATH}/target/lib
+  echo "lib目录："$MODULE_LIB_PATH
   if [ -d $MODULE_LIB_PATH ]; then
     # 将打包后的lib下的依赖全部拷贝到临时的lib文件夹下
     \cp -r ${MODULE_LIB_PATH}/* ${MODULE_TMP_LIB_PATH}
+    `ll ${MODULE_TMP_LIB_PATH}`
     for LIB_JAR_FILE in $MODULE_TMP_LIB_PATH
     do
+      echo $LIB_JAR_FILE
       if [ -f $LIB_JAR_FILE ];then
         echo "校验依赖Jar："$LIB_JAR_FILE
         chenk_md5 $LIB_JAR_FILE
