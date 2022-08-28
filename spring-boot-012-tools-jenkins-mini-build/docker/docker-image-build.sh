@@ -109,10 +109,10 @@ MODULE_LIB_PATH=${MODULE_BATH_PATH}/docker/lib
 MODULE_APP_PATH=${MODULE_BATH_PATH}/docker/app
 
 \cp -r ${MODULE_BATH_PATH}/target/*.jar ${MODULE_APP_PATH}
-\cp -r ${MODULE_BATH_PATH}/lib/*.jar ${MODULE_LIB_PATH}
+\cp -r ${MODULE_BATH_PATH}/target/lib/*.jar ${MODULE_LIB_PATH}
 
 LIB_UPDATE=false
-for LIB_JAR_FILE in ${MODULE_TMP_LIB_PATH}/*.jar
+for LIB_JAR_FILE in ${MODULE_LIB_PATH}/*.jar
 do
   echo $LIB_JAR_FILE
   if [ -f $LIB_JAR_FILE ];then
@@ -132,7 +132,7 @@ if [ $LIB_UPDATE = true ]; then
 fi
 
 APP_UPDATE=false
-for APP_JAR_FILE in ${MODULE_TMP_LIB_PATH}/*.jar
+for APP_JAR_FILE in ${MODULE_APP_PATH}/*.jar
 do
   echo $APP_JAR_FILE
   if [ -f $APP_JAR_FILE ];then
