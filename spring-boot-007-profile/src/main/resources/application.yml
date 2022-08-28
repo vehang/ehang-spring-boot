@@ -4,5 +4,5 @@ spring:
   application:
     name: spring-boot-007-profile # 项目名
 server:
-  port: 18088 # 端口
+  port: 8087 # 端口
 

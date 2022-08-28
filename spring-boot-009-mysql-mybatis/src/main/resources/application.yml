@@ -1,3 +1,4 @@
+
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启sql日志
@@ -59,3 +60,5 @@ spring:
         #登录密码
         login-password: 123456
       connectionInitSqls: ["set names utf8mb4;"]
+server:
+  port: 8089
