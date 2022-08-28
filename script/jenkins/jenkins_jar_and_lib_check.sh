@@ -111,41 +111,63 @@ then
 
   # 在模块下创建一个临时的目录
   MODULE_TMP_PATH=${MODULE_PATH}/tmp
-  mkdir -p $MODULE_TMP_PATH
+  sudo mkdir -p $MODULE_TMP_PATH
 
   # 在模块下临时目录下创建一个
   MODULE_TMP_LIB_PATH=${MODULE_TMP_PATH}/lib
-  mkdir -p $MODULE_TMP_LIB_PATH
+  sudo mkdir -p $MODULE_TMP_LIB_PATH
 
   # 将jar包拷贝到临时目录
-  \cp -r $JAR_FILE $MODULE_TMP_PATH
+  sudo \cp -r $JAR_FILE $MODULE_TMP_PATH
 
   # lib目录的路径
   MODULE_LIB_PATH=${MODULE_PATH}/target/lib
   if [ -d $MODULE_LIB_PATH ]; then
     # 将打包后的lib下的依赖全部拷贝到临时的lib文件夹下
-    \cp -r ${MODULE_LIB_PATH}/* ${MODULE_TMP_LIB_PATH}
+    sudo \cp -r ${MODULE_LIB_PATH}/* ${MODULE_TMP_LIB_PATH}
     for LIB_JAR_FILE in $MODULE_TMP_LIB_PATH
     do
       if [ -f $LIB_JAR_FILE ];then
         echo "校验依赖Jar："$LIB_JAR_FILE
-        chenk_md5 $LIB_JAR_FILE
+#        chenk_md5 $LIB_JAR_FILE
+#        if [ $? = 0 ];then
+#          echo "校验成功，没有发生变化"
+#        else
+#          echo "校验失败，已经更新"
+#        fi
+
+        # 直接通过jar校验
+        jar_chenk_md5 $LIB_JAR_FILE
         if [ $? = 0 ];then
-          echo "校验成功，没有发生变化"
-        else
-          echo "校验失败，已经更新"
+          rm -f $LIB_JAR_FILE
+          echo "依赖lib校验成功，没有发生变化"
+          #return 0
+        fi
+
+        # 通过解压jar 校验是否更新
+        jar_unzip_check_md5 $LIB_JAR_FILE
+        if [ $? = 0 ];then
+          rm -f $LIB_JAR_FILE
+          echo "依赖lib校验成功，没有发生变化"
+          #return 0
         fi
 
       fi
     done
   fi
 
-  echo "校验项目Jar："$JAR_FILE
-  chenk_md5 $JAR_FILE
+  # 直接通过jar校验
+  jar_chenk_md5 $JAR_FILE
   if [ $? = 0 ];then
-     echo "校验成功，没有发生变化"
-  else
-     echo "校验失败，已经更新"
+    rm -f $JAR_FILE
+    echo "jar校验成功，没有发生变化"
+  fi
+
+  # 通过解压jar 校验是否更新
+  jar_unzip_check_md5 $JAR_FILE
+  if [ $? = 0 ];then
+    rm -f $JAR_FILE
+    echo "jar校验成功，没有发生变化"
   fi
 fi
 done
