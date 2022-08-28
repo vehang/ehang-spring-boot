@@ -75,7 +75,7 @@ chenk_md5() {
   JAR_FILE=$1
   if [ -f $JAR_FILE ]; then
     # 直接通过jar校验
-    jar_chenk_md5 $JAR_FILE
+    jar_check_md5 $JAR_FILE
     if [ $? = 0 ];then
       rm -f $LIB_JAR_FILE
       return 0
