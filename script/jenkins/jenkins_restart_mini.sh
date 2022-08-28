@@ -113,7 +113,7 @@ then
   UPDATE=false
   # lib目录的路径
   MODULE_LIB_PATH=${MODULE_PATH}/target/lib
-  if [ -d $MODULE_LIB_PATH ]; then
+  if [ -d $MODULE_TMP_LIB_PATH ]; then
     # 将打包后的lib下的依赖全部拷贝到临时的lib文件夹下
     #\cp -r ${MODULE_LIB_PATH}/* ${MODULE_TMP_LIB_PATH}
     for LIB_JAR_FILE in ${MODULE_TMP_LIB_PATH}/*.jar
@@ -126,7 +126,7 @@ then
         else
           echo "校验失败，发现有lib包已经更新了，需要重新启动"
           UPDATE=true
-          break
+          #break
         fi
       fi
     done
@@ -174,7 +174,7 @@ then
       fi
 
       # 将最新的MD5值写入到缓存文件
-      md5sum $JAR_FILES_INFO > $JAR_FILES_INFO_MD5
+      # md5sum $JAR_FILES_INFO > $JAR_FILES_INFO_MD5
   fi
   echo "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
   echo ""
