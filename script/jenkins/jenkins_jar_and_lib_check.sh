@@ -3,10 +3,6 @@
 # 只把有更新的jar推送到远端服务器
 # 最小构建的方式，需要检测lib包
 
-# JDK的环境变量
-export JAVA_HOME=/usr/local/jdk-11.0.14
-export PATH=$JAVA_HOME/bin:$PATH
-
 # 基础路径，由参数传入
 # 多模块的时候，需要在路径中使用*统配一下多模块
 # 比如/opt/ehang-spring-boot是多模块，下面由module1和module2
@@ -14,9 +10,6 @@ export PATH=$JAVA_HOME/bin:$PATH
 JAR_BATH=$1
 echo "jenkins校验 基础路径:"$JAR_BATH
 JAR_PATH=${JAR_BATH}/target/*.jar
-
-# 临时的解压目录
-JAR_UNZIP_PATH=/tmp/jar_unzip_tmp
 
 # 直接通过jar校验
 jar_check_md5() {
