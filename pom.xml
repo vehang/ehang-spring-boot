@@ -21,7 +21,7 @@
     </properties>
 
     <modules>
-<!--        <module>spring-boot-001-hello-world</module>
+        <module>spring-boot-001-hello-world</module>
         <module>spring-boot-002-banner</module>
         <module>spring-boot-003-http-request</module>
         <module>spring-boot-004-request-validate</module>
@@ -33,8 +33,7 @@
         <module>spring-boot-009-mysql-mybatis</module>
         <module>spring-boot-010-mysql-mybatis-plus</module>
         <module>spring-boot-011-redis</module>
-        <module>spring-boot-012-tools-jenkins-mini-build</module>-->
-
+        <module>spring-boot-012-tools-jenkins-mini-build</module>
         <module>spring-boot-001-hello-world</module>
         <module>spring-boot-002-banner</module>
         <module>spring-boot-012-tools-jenkins-mini-build</module>
@@ -44,6 +43,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
         <dependency>
